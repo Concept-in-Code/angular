@@ -1,0 +1,27 @@
+{
+  "name": "@cinlib/ui",
+  "version": "0.0.1",
+  "description": "Contains various reusable components",
+  "author": "Concept in Code",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concept-in-code/angular.git"
+  },
+  "homepage": "https://github.com/concept-in-code/angular/",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^17.1.0",
+    "@angular/core": "^17.1.0",
+    "@angular/material": ">=17.0.0",
+    "@angular/cdk": ">=17.0.0",
+    "@angular/animations": ">=17.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
