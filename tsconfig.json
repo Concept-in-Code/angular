@@ -3,11 +3,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@cinlib/ui/*": [
-        "./projects/cinlib/ui/*"
+      "ngx-cinlib/*": [
+        "./projects/ngx-cinlib/*"
       ],
-      "@cinlib/ui": [
-        "./projects/cinlib/ui"
+      "ngx-cinlib": [
+        "./projects/ngx-cinlib"
       ]
     },
     "outDir": "./dist/out-tsc",

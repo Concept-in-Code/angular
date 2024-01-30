@@ -1,5 +1,5 @@
 {
-  "name": "@cinlib/ui",
+  "name": "ngx-cinlib",
   "version": "0.0.1",
   "description": "Contains various reusable components",
   "author": "Concept in Code",
@@ -7,12 +7,14 @@
     "type": "git",
     "url": "https://github.com/concept-in-code/angular.git"
   },
-  "homepage": "https://github.com/concept-in-code/angular/",
+  "homepage": "https://github.com/concept-in-code/angular/",  
   "keywords": [
     "angular",
     "javascript",
     "typescript"
   ],
+  "private": false,
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^17.1.0",
     "@angular/core": "^17.1.0",
@@ -23,5 +25,8 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }

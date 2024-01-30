@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pipe, PipeTransform } from '@angular/core';
-import { Maybe } from '@cinlib/ui/core';
+import { Maybe } from 'ngx-cinlib/core';
 import { Observable } from 'rxjs';
 import { TranslationService } from '../services/translation.service';
 

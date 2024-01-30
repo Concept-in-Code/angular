@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Maybe } from '@cinlib/ui/core';
+import { Maybe } from 'ngx-cinlib/core';
 import { Subject, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs';
 import { TranslationService } from '../services/translation.service';
 

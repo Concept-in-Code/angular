@@ -1,4 +1,4 @@
-import { Maybe } from '@cinlib/ui/core';
+import { Maybe } from 'ngx-cinlib/core';
 
 export type Language = {
   active?: Maybe<boolean>;

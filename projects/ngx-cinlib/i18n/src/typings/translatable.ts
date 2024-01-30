@@ -1,5 +1,5 @@
-import { Maybe } from '@cinlib/ui/core';
-import { Language } from "./language";
+import { Maybe } from 'ngx-cinlib/core';
+import { Language } from './language';
 
 export type Translatable = {
   language?: Maybe<Language>;

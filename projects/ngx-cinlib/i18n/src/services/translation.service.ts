@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-import { Maybe } from '@cinlib/ui/core';
+import { Maybe } from 'ngx-cinlib/core';
 import { BehaviorSubject, Observable, combineLatest, filter, isObservable, map, of } from 'rxjs';
 import { Language } from '../typings/language';
 import { Translatable } from '../typings/translatable';
