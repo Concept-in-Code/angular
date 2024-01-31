@@ -1,0 +1,11 @@
+<mat-drawer-container>
+  <mat-drawer [mode]="mode"
+      [position]="position" 
+      (closed)="close()">
+    <cin-sidenav-content></cin-sidenav-content>
+  </mat-drawer>
+
+  <!-- Parent content -->
+  <ng-content></ng-content>
+
+</mat-drawer-container>

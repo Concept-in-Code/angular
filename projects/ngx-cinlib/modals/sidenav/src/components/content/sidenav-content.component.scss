@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: var(--gap);
+
+  padding: var(--gap) 1rem;
+}
+
+button {
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  } 
+}
