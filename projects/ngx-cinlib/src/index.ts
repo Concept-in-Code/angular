@@ -1,0 +1,1 @@
+export const NGX_CINLIB = 'ngx-cinlib';

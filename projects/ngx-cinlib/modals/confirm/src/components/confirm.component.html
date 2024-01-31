@@ -1,0 +1,21 @@
+<h1 mat-dialog-title [i18nLabel]="data?.titleLabel"></h1>
+
+<mat-dialog-content>
+  <span [i18nLabel]="data?.messageLabel"></span>
+  
+  <strong [i18nLabel]="data?.context"></strong>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button
+    mat-dialog-close
+    i18nLabel="cancel">
+  </button>
+
+  <button mat-raised-button
+    [color]="data?.buttonColor"
+    mat-dialog-close
+    [i18nLabel]="data?.buttonLabel"
+    [mat-dialog-close]="true">
+  </button>
+</mat-dialog-actions>

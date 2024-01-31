@@ -1,0 +1,24 @@
+button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+section {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: .5rem;
+}
+
+span{
+  color: var(--color-black);
+}
+
+::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface{
+  background-color: white;
+  border-radius: var(--mdc-shape-small);
+}

@@ -1,0 +1,41 @@
+<div>
+  <button mat-icon-button (click)="ref.dismissWithAction()">
+    <cin-icon [icon]="['fas', 'xmark']"></cin-icon>
+  </button>
+  <section>
+    
+    @if (feedback.type === error || feedback.type === critical) {
+      <cin-icon 
+        [icon]="['fas', 'circle-exclamation']" 
+        [size]="'2x'"
+        [style.color]="'var(--color-warn-900)'">
+      </cin-icon>
+    } @else if (feedback.type === success) {
+      <cin-icon 
+        [icon]="['fas', 'circle-check']" 
+        [size]="'2x'"
+        [style.color]="'var(--color-success-900)'">
+      </cin-icon>
+    } @else if (feedback.type === info) {
+      <cin-icon 
+        [icon]="['fas', 'circle-info']" 
+        [size]="'2x'"
+        [style.color]="'var(--color-warn-200)'">
+      </cin-icon>
+    }
+    
+    @if (feedback.labelMessage) {
+      <span>
+        <strong [i18nLabel]="feedback.labelMessage"
+          [variables]="feedback.labelVariables">
+        </strong>
+      </span>
+    }
+
+    @if (feedback.labelAction) {
+      <span [i18nLabel]="feedback.labelAction"
+        [variables]="feedback.labelVariables">
+      </span>
+    }
+  </section>
+</div>

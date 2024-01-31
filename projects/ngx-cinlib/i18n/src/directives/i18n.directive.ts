@@ -7,7 +7,7 @@ import { TranslationService } from '../services/translation.service';
   selector: '[i18nLabel]',
   standalone: true,
 })
-export class LabelDirective implements OnInit, OnChanges, OnDestroy {
+export class I18nDirective implements OnInit, OnChanges, OnDestroy {
 
   @Input()
   public i18nLabel?: Maybe<string>;

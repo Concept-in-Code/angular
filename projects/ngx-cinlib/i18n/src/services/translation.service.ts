@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, combineLatest, filter, isObservable, map, 
 import { Language } from '../typings/language';
 import { Translatable } from '../typings/translatable';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TranslationService {
 
   private labels = new BehaviorSubject<Map<string, Maybe<Translatable>[]>>(new Map());
