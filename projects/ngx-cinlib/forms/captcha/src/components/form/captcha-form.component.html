@@ -1,0 +1,11 @@
+@if (sitekey | async) {
+  <ng-hcaptcha class="mobile"
+    (verify)="token = $event"
+    [siteKey]="(sitekey | async)!"
+    size="compact">
+  </ng-hcaptcha>
+  <ng-hcaptcha class="desktop"
+    (verify)="token = $event"
+    [siteKey]="(sitekey | async)!">
+  </ng-hcaptcha>
+}

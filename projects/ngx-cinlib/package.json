@@ -30,6 +30,7 @@
     "@angular-material-components/datetime-picker": "^16.0.1",
     "@ckeditor/ckeditor5-angular": "^6.0.1",
     "@ckeditor/ckeditor5-build-classic": "^37.1.0",
+    "ng-hcaptcha": "^2.2.0",
     "tslib": "^2.3.0"
   },
   "overrides": {
@@ -45,6 +46,7 @@
   "allowedNonPeerDependencies": [
     "@angular-material-components/datetime-picker",
     "@ckeditor/ckeditor5-angular",
-    "@ckeditor/ckeditor5-build-classic"
+    "@ckeditor/ckeditor5-build-classic",
+    "ng-hcaptcha"
   ]
 }

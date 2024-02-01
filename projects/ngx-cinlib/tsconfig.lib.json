@@ -6,7 +6,10 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    "paths": {
+      "ng-hcaptcha": ["./node_modules/ng-hcaptcha"]
+    }
   },
   "exclude": [
     "**/*.spec.ts"
