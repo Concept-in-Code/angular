@@ -1,0 +1,10 @@
+:host ::ng-deep {
+
+  --ck-border-radius: 1rem !important;
+  --ck-color-base-border: var(--mdc-outlined-text-field-outline-color) !important;
+  --ck-color-base-background: var(--color-lightest) !important;
+
+  .ck-editor__editable_inline {
+    min-height: 20rem;
+  }
+}

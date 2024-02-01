@@ -3,5 +3,9 @@
   "dest": "../../dist/ngx-cinlib",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "@ckeditor/ckeditor5-angular",
+    "@ckeditor/ckeditor5-build-classic"
+  ]
 }
