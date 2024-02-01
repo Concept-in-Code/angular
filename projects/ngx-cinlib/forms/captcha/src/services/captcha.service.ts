@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Maybe } from 'ngx-cinlib/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CaptchaService {
 
   private _siteKey = new BehaviorSubject<Maybe<string>>(undefined);
