@@ -1,0 +1,19 @@
+
+.checked {
+  color: var(--color-success-500);
+}
+
+div {
+  display: flex;
+  gap: .5rem;
+
+  cin-icon {
+    color: var(--color-accent-900)
+  }
+}
+
+:host ::ng-deep {
+  .active.mat-mdc-raised-button {
+    border: 1px solid var(--color-accent-900) !important;
+  }
+}
