@@ -1,0 +1,9 @@
+//TODO: shouldn't give this element 100% but rather let it
+// handle in the AppRowComponent if 100% are necessary
+mat-form-field {
+  width: 100%;
+}
+
+ngx-mat-datepicker-toggle {
+  color: var(--color-dark-gray);
+}

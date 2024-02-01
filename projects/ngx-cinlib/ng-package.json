@@ -5,6 +5,7 @@
     "entryFile": "src/index.ts"
   },
   "allowedNonPeerDependencies": [
+    "@angular-material-components/datetime-picker",
     "@ckeditor/ckeditor5-angular",
     "@ckeditor/ckeditor5-build-classic"
   ]

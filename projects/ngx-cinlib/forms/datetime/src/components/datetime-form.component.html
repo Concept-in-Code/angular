@@ -1,0 +1,27 @@
+<mat-form-field appearance="outline">
+  <mat-label [i18nLabel]="label"></mat-label>
+
+  <input matInput
+    [ngxMatDatetimePicker]="startPicker"
+    [formControl]="control" [min]="minDate">
+
+  <ngx-mat-datepicker-toggle matSuffix
+    [for]="startPicker">
+  </ngx-mat-datepicker-toggle>
+
+  <ngx-mat-datetime-picker #startPicker
+    [stepMinute]="stepMinute">
+    <ngx-mat-datepicker-actions>
+      <button mat-button
+        ngxMatDatepickerCancel
+        i18nLabel="cancel">
+      </button>
+
+      <button mat-raised-button
+        ngxMatDatepickerApply        
+        color="primary"
+        i18nLabel="select">
+      </button>
+    </ngx-mat-datepicker-actions>
+  </ngx-mat-datetime-picker>
+</mat-form-field>
