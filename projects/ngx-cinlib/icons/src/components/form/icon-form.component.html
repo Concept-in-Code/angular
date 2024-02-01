@@ -1,0 +1,23 @@
+<mat-form-field appearance="outline">
+  <mat-label i18nLabel="enterIconName"></mat-label>
+
+  <input [formControl]="control"
+    type="text"
+    matInput 
+    [matAutocomplete]="auto">
+
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option *ngFor="let icon of filteredIcons" [value]="icon![1]">
+      <article>
+        <cin-icon [icon]="icon"></cin-icon>
+        <span> {{ icon![1] }}</span>
+      </article>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-hint>
+    <a class="link" mat-button href="https://fontawesome.com/search?o=r&m=free&s=solid"
+      target="_blank">
+      <span i18nLabel="iconList"></span>
+    </a>
+  </mat-hint>
+</mat-form-field>

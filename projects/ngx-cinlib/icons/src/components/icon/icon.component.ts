@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostBinding, Input, OnChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { BrandIcon } from '../typings/brand-icons';
-import { RegularIcon } from '../typings/regular-icons';
-import { SolidIcon } from '../typings/solid-icons';
+import { BrandIcon } from '../../typings/brand-icons';
+import { RegularIcon } from '../../typings/regular-icons';
+import { SolidIcon } from '../../typings/solid-icons';
 
 @Component({
   selector: 'cin-icon',

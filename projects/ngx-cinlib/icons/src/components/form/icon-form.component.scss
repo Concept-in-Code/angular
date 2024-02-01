@@ -1,0 +1,15 @@
+section {
+  display: flex;
+  flex-flow: row;
+  gap: .5rem;
+}
+
+article {
+  display: flex;
+  flex-flow: row;
+  gap: 1.2rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
