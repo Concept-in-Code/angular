@@ -1,0 +1,27 @@
+div {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  width: 10rem;
+  max-width: calc(100% - 2rem);
+  height: 5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-gray);
+  
+  cursor: pointer;
+  user-select: none;
+
+  &.active {
+    border: 2px solid var(--color-accent-900);
+
+    cin-icon {
+      color: var(--color-accent-900);
+    }
+  }
+}
+
+section {
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: space-between;
+}
