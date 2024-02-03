@@ -12,8 +12,8 @@ export class SidenavService {
     return this.component.asObservable();
   }
 
-  public open(conent: SidenavContent) {
-    this.component.next(conent)
+  public open(content: SidenavContent) {
+    this.component.next(content)
   }
 
   public close(): void {
