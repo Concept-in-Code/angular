@@ -1,7 +1,9 @@
 <div [class.row]="displayRow">
-  <cin-radio-button *ngFor="let input of inputs"
-    [input]="input"
-    [value]="value"
-    (valueChanged)="next($event)">
-  </cin-radio-button>
+  @for (input of inputs; track input) {
+    <cin-radio-button
+      [input]="input"
+      [value]="value"
+      (valueChanged)="next($event)">
+    </cin-radio-button>
+  }
 </div>

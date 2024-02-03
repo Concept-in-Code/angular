@@ -4,7 +4,9 @@
   [disabled]="disabled"
   (click)="changeSelect($event)">
     <div>
-      <cin-icon *ngIf="input?.icon" [icon]="input!.icon!"></cin-icon>
-      <span [i18nLabel]="input?.label"></span>
+      @if (input?.icon) {
+        <cin-icon [icon]="input!.icon!"></cin-icon>
+        <span [i18nLabel]="input?.label"></span>
+      }
     </div>
 </button>

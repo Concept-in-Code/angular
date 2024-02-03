@@ -1,0 +1,50 @@
+<mat-expansion-panel
+  [hideToggle]="hideToggle || lastStepIdx === 0 || !!icon"
+  [expanded]="currentStepIdx === index"
+  (opened)="setCurrentStep()"
+  [class.step-invalid]="isInvalid()">
+  <mat-expansion-panel-header>
+    <mat-panel-title [i18nLabel]="titleLabel" [suffix]="required || hasRequiredValidator ? '*' : ''">
+    </mat-panel-title>
+
+    <mat-panel-description [i18nLabel]="descriptionLabel">
+    </mat-panel-description>
+
+    @if (icon) {
+      <cin-icon [icon]="['fas', icon]"></cin-icon>
+    }
+  </mat-expansion-panel-header>
+
+  <div class="container">
+    <!-- Form controls of parent-->
+    <div class="controls">
+      <ng-content></ng-content>
+    </div>
+  
+    @if (showBackButton() || showNextButton()) {
+      <mat-divider></mat-divider>
+    }
+  
+    <section>
+      @if (showBackButton()) {
+        <button
+          mat-stroked-button
+          color="warn"
+          i18nLabel="back"
+          (click)="back()">
+        </button>
+      }
+
+      @if (showNextButton()) {
+        <button
+          mat-stroked-button
+          color="primary"
+          i18nLabel="next"
+          (click)="next()">
+        </button>
+      }
+
+    </section>
+  </div>
+
+</mat-expansion-panel>

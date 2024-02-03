@@ -7,12 +7,15 @@
     [matAutocomplete]="auto">
 
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-    <mat-option *ngFor="let icon of filteredIcons" [value]="icon![1]">
-      <article>
-        <cin-icon [icon]="icon"></cin-icon>
-        <span> {{ icon![1] }}</span>
-      </article>
-    </mat-option>
+
+    @for (icon of filteredIcons; track icon) {
+      <mat-option [value]="icon![1]">
+        <article>
+          <cin-icon [icon]="icon"></cin-icon>
+          <span> {{ icon![1] }}</span>
+        </article>
+      </mat-option>
+    }
   </mat-autocomplete>
   <mat-hint>
     <a class="link" mat-button href="https://fontawesome.com/search?o=r&m=free&s=solid"

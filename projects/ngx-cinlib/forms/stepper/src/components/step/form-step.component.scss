@@ -1,0 +1,55 @@
+@import '../../../../../styles/mobile_mixins.scss';
+
+.container {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+
+  .controls {
+    display: flex;
+    flex-flow: column;
+    gap: 2rem;
+  }
+  
+  section {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}
+
+.step-invalid {
+  border: 1px solid var(--color-warn-500);
+  border-left: solid var(--color-warn-500) !important;
+}
+
+.mat-expansion-panel-header-description {
+  flex-grow: 1.5;
+}
+
+:host ::ng-deep {
+
+  mat-expansion-panel.mat-expanded {
+    border-left: solid var(--color-success-600);
+  }
+
+  .mat-content.mat-content-hide-toggle {
+    margin-right: 0;
+  }
+
+  .mat-expansion-panel-header {
+    @include responsive(phone) {
+  
+      .mat-content {
+        display: block !important;
+      }
+  
+      mat-panel-description {
+        font-size: .875rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,31 @@
+<mat-accordion>
+  <ng-content></ng-content>
+</mat-accordion>
+
+<section>
+  @if(captchaRequired) {
+    <cin-captcha-submit
+      [disabled]="(valid | async) === false"
+      label="save"
+      (verified)="save($event)">
+    </cin-captcha-submit>
+  } @else {
+    <button mat-flat-button
+      [disabled]="(valid | async) === false"
+      color="primary"
+      i18nLabel="save"
+      (click)="save()">
+    </button>
+  }
+
+  <button mat-raised-button
+    i18nLabel="cancel"
+    (click)="cancel()">
+  </button>
+
+  <button mat-raised-button
+    [disabled]="!dirty"
+    i18nLabel="reset"
+    (click)="reset()">
+  </button>
+</section>

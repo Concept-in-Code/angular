@@ -1,8 +1,11 @@
 <mat-form-field appearance="outline">
   <mat-label i18nLabel="interval"></mat-label>
+
   <mat-select [formControl]="control">
-    <mat-option *ngFor="let interval of intervals" [value]="interval.value">
-      <span [i18nLabel]="interval.label"></span>
-    </mat-option>
+    @for (interval of intervals; track interval) {
+      <mat-option [value]="interval.value">
+        <span [i18nLabel]="interval.label"></span>
+      </mat-option>
+    }
   </mat-select>
 </mat-form-field>

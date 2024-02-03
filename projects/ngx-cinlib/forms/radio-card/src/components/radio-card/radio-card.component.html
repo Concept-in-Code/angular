@@ -2,8 +2,12 @@
   (click)="changeSelect($event)"
   class="border-box">
     <strong [i18nLabel]="input?.label"></strong>
+
     <section>
       <cin-icon [icon]="input!.icon" [size]="'lg'"></cin-icon>
-      <span *ngIf="input?.display">{{ input?.display }}</span>
+
+      @if (input?.display) {
+        <span>{{ input?.display }}</span>
+      }
     </section>
 </div>

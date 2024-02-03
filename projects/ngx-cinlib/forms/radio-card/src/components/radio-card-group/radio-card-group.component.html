@@ -1,5 +1,7 @@
-<cin-radio-card *ngFor="let input of inputs"
-  [input]="input"
-  [value]="value"
-  (valueChanged)="next($event)">
-</cin-radio-card>
+@for (input of inputs; track input) {
+  <cin-radio-card
+    [input]="input"
+    [value]="value"
+    (valueChanged)="next($event)">
+  </cin-radio-card>
+}

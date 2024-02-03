@@ -6,11 +6,15 @@
       [class.active] = "!filtersCollapsed">
         <div>
           <cin-icon [icon]="['fas', 'filter']"></cin-icon>
+          
           <span i18nLabel="filter"></span>
-          <cin-icon *ngIf="filtersActive"
-            class="check-icon"
-            [icon]="['fas', 'check']">
-          </cin-icon>
+          
+          @if (filtersActive) {
+            <cin-icon
+              class="check-icon"
+              [icon]="['fas', 'check']">
+            </cin-icon>
+          }
         </div>
     </button>
 
