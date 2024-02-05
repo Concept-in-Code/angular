@@ -1,0 +1,35 @@
+<ng-template #template>
+  <div class="container">
+    <section (click)="changeExpansion()">
+      <div class="drop-title">
+        @if (titleLabel) {
+          <strong [i18nLabel]="titleLabel"></strong>
+        } @else {
+          <strong> {{ title }}</strong>
+        }
+        @if (subTitleLabel) {
+          <small [i18nLabel]="subTitleLabel"></small>
+        } @else {
+          <small> {{ subTitle }}</small>
+        }
+      </div>
+      @if (expandable) {
+        @if (!expanded) {
+          <cin-icon 
+            appTooltip="expand"
+            [icon]="['fas', 'arrow-down']">
+          </cin-icon>
+        } @else {
+          <cin-icon 
+            appTooltip="collapse" 
+            [icon]="['fas', 'arrow-up']">
+          </cin-icon>
+        }
+      }
+    </section>
+    <!-- Parent Content-->
+    @if (expanded) {
+      <ng-content></ng-content>
+    }
+  </div>
+</ng-template>

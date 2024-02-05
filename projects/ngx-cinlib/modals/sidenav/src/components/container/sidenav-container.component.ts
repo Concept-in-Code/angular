@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer, MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { Subject, takeUntil } from 'rxjs';
 import { SidenavService } from '../../services/sidenav-service';
@@ -18,7 +18,7 @@ import { SidenavContentComponent } from '../content/sidenav-content.component';
     MatSidenavModule,
   ]
 })
-export class SidenavContainerComponent implements OnDestroy {
+export class SidenavContainerComponent implements OnInit, OnDestroy {
 
   @Input()
   public mode: MatDrawerMode = 'over';
@@ -34,7 +34,9 @@ export class SidenavContainerComponent implements OnDestroy {
   constructor(
     private sidenavService: SidenavService,
   ) {
+  }
 
+  public ngOnInit(): void {
     this.sidenavService.toggled()
       .pipe(takeUntil(this.destroy))
       .subscribe(component => component ? this.sidenav?.open() : this.sidenav?.close());

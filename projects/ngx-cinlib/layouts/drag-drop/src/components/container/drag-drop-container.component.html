@@ -1,0 +1,27 @@
+<div class="container"
+  [class.disabled]="disabled"
+  cdkDropList
+  (cdkDropListDropped)="drop($event)">
+  @for (element of elements; track element; let index = $index) {
+    <mat-card cdkDrag cdkDragLockAxis="y" (cdkDragStarted)="drag()">
+      <section class="drag-handle" cdkDragHandle>
+        <cin-icon [icon]="['fas', 'grip-vertical']"></cin-icon>
+      </section>
+  
+      <section class="content-area">
+        <ng-container *ngTemplateOutlet="element.component.template">
+        </ng-container>
+      </section>
+  
+      @if (deletable) {
+        <button mat-button
+          (click)="onDelete(index)">
+          <cin-icon [icon]="['fas', 'trash']"></cin-icon>
+        </button>
+      }
+  
+      <span class="drag-placeholder" *cdkDragPlaceholder></span>
+      <span *cdkDragPreview></span>
+    </mat-card>
+  }
+</div>

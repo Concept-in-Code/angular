@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'cin-captcha-dialog',
   templateUrl: 'captcha-dialog.component.html',
 })
-export class CaptchaDialogComponent implements OnDestroy {
+export class CaptchaDialogComponent implements OnDestroy, OnInit {
 
   public control = new FormControl('', [Validators.required])
 
@@ -16,6 +16,9 @@ export class CaptchaDialogComponent implements OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<CaptchaDialogComponent>,
   ) {
+  }
+
+  public ngOnInit(): void {
     this.control?.valueChanges
       .pipe(takeUntil(this.destroy))
       .subscribe(token => token && this.dialogRef.close(token));
