@@ -1,0 +1,4 @@
+<mat-progress-bar *ngIf="(loading | async)" mode="query"></mat-progress-bar>
+<div [ngClass]="{'loading': loading | async }">
+  <ng-content></ng-content>
+</div>

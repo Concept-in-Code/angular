@@ -32,10 +32,7 @@ export class TranslationService {
           const label = labels?.get(key)?.find(label => label?.language?.locale === language?.locale);
           return label ?? labels?.get(key)?.find(label => label?.language?.locale === defaultLocale)
         }),
-        map((label) => label
-          ? label['content'] as string
-          : key
-        )
+        map(label => label ? label['content'] as string : key)
       )
       : of(key);
   }

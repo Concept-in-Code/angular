@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Maybe } from 'ngx-cinlib/core';
+import { I18nDirective } from 'ngx-cinlib/i18n';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { SolidIcon, SolidIconsType, solidIcons } from '../../typings/solid-icons';
 import { IconComponent } from '../icon/icon.component';
@@ -25,6 +26,7 @@ import { IconComponent } from '../icon/icon.component';
   imports: [
     CommonModule,
     IconComponent,
+    I18nDirective,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,

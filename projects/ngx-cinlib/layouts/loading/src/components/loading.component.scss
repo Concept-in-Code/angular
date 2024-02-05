@@ -1,0 +1,13 @@
+mat-progress-bar {
+  position: absolute;
+  z-index: 1;
+}
+
+.loading {
+  filter: blur(1px) grayscale(90%);
+  pointer-events: none;
+}
+
+div {
+  height: 100%;
+}
