@@ -1,0 +1,14 @@
+@import '../../../../styles/mobile_mixins.scss';
+
+:host {
+  width: 100%;
+}
+
+.row-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
