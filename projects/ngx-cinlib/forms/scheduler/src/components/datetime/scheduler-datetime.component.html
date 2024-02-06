@@ -1,0 +1,23 @@
+<cin-grid-row [columns]="columns" [formGroup]="form">
+  <cin-datetime-form
+    [cinAssignColumns]="assignedColumns"
+    label="begin"
+    formControlName="startDate">
+  </cin-datetime-form>
+
+  <cin-datetime-form
+    [cinAssignColumns]="assignedColumns"
+    label="end"
+    formControlName="endDate">
+  </cin-datetime-form>
+
+  @if ((results | async)?.length) {
+    <button
+      mat-icon-button
+      color="primary"
+      appTooltip="showSchedules"
+      (click)="show()">
+      <cin-icon [icon]="['fas', 'eye']"></cin-icon>
+    </button>
+  }
+</cin-grid-row>

@@ -1,0 +1,11 @@
+<cin-grid-row [columns]="columns">
+  <span i18nLabel="repeatEvery"
+    [cinAssignColumns]="leftAssignedColumns">
+  </span>
+
+  <mat-form-field appearance="outline"
+    [cinAssignColumns]="numberAssignedColumns">
+    <mat-label [i18nLabel]="everyRecurrenceLabel | async"></mat-label>
+    <input matInput type="number" [formControl]="control">
+  </mat-form-field>
+</cin-grid-row>

@@ -1,0 +1,6 @@
+<button mat-flat-button
+  color="accent"
+  i18nLabel="generateSchedules"
+  [disabled]="((errors | async)?.length || 0) > 0"
+  (click)="generate()">
+</button>

@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: var(--gap);
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-flow: column;
+
+  .entry {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date {
+    display: flex;
+    gap: 1rem;
+
+    strong {
+      width: 3rem;
+      text-align: right;
+    }
+  }
+}

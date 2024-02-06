@@ -1,0 +1,26 @@
+@if (generationPerformed | async) {
+  <cin-scheduler-generated></cin-scheduler-generated>
+} @else {
+  <cin-scheduler-datetime></cin-scheduler-datetime>
+  
+  <mat-divider></mat-divider>
+  
+  <cin-scheduler-recurrence-type>
+  </cin-scheduler-recurrence-type>
+  
+  @if ((recurrenceType | async) !== 'noRecurrence') {
+    <section>
+      <cin-scheduler-recurrence-interval>
+      </cin-scheduler-recurrence-interval>
+    
+      <cin-scheduler-recurrence-end>
+      </cin-scheduler-recurrence-end>
+    </section>
+  
+    <cin-scheduler-execute>
+    </cin-scheduler-execute>
+  }
+  
+  <cin-scheduler-errors>
+  </cin-scheduler-errors>
+}

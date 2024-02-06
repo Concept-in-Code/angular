@@ -1,4 +1,4 @@
-import { Maybe } from "ngx-cinlib/core";
+import { Maybe } from 'ngx-cinlib/core';
 
 export enum ConfirmType  {
   Cancel = 'cancel',

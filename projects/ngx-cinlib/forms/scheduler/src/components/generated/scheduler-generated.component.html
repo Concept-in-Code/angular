@@ -1,0 +1,14 @@
+<cin-grid-row [columns]="columns">
+  <button mat-flat-button
+    color="accent"
+    i18nLabel="showSchedules"
+    (click)="show()"
+    [cinAssignColumns]="leftAssignedColumns">
+  </button>
+  <button mat-stroked-button
+    color="primary"
+    i18nLabel="createNewSchedules"
+    (click)="reset()"
+    [cinAssignColumns]="leftAssignedColumns">
+  </button>
+</cin-grid-row>

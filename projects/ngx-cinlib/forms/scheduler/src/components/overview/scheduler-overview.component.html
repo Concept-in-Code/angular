@@ -1,0 +1,48 @@
+<h2 mat-dialog-title i18nLabel="schedules"></h2>
+
+<mat-dialog-content>
+  @for (schedule of results | async; track schedule; let last = $last; let i = $index) {
+    <article>
+      <div class="entry">
+        <div>
+          <div class="date">
+            <strong i18nLabel="from"></strong>
+            <span>
+              {{ schedule.startDate | date: 'medium' }}
+            </span>
+          </div>
+        
+          <div class="date">
+            <strong i18nLabel="until"></strong>
+            <span>
+              {{ schedule.endDate | date: 'medium' }}
+            </span>
+          </div>
+        </div>
+  
+        <button mat-icon-button
+          (click)="remove(i)">
+          <cin-icon [icon]="['fas', 'trash']"></cin-icon>
+        </button>
+      </div>
+  
+      <mat-divider *ngIf="!last"></mat-divider>
+    </article>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button
+    mat-dialog-close
+    i18nLabel="cancel">
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    i18nLabel="deleteAll"
+    [disabled]="!(results | async)?.length"
+    mat-dialog-close
+    (click)="deleteAll()">
+  </button>
+</mat-dialog-actions>
