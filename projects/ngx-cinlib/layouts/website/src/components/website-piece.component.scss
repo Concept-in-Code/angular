@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+}
+
+a {
+  color: var(--color-black);
+}
+
