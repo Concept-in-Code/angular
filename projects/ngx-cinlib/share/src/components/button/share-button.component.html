@@ -1,0 +1,8 @@
+<button mat-button
+  (click)="openDialog()"
+  [cinTooltip]="createTooltip()">
+  <div>
+    <cin-icon [icon]="['fas', 'share-nodes']" [size]="'lg'"></cin-icon>
+    <span *ngIf="withLabel" [i18nLabel]="shareWithOthersLabel"></span>
+  </div>
+</button>

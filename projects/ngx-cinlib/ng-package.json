@@ -9,6 +9,7 @@
     "@ckeditor/ckeditor5-angular",
     "@ckeditor/ckeditor5-build-classic",
     "cinlib-charts",
-    "ng-hcaptcha"
+    "ng-hcaptcha",
+    "ngx-sharebuttons"
   ]
 }

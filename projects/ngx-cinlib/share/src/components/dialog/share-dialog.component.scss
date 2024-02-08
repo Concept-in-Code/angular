@@ -1,0 +1,64 @@
+mat-dialog-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+
+  button {
+    display: flex;
+    gap: .5rem;
+    padding: .5rem;
+    align-items: center;
+    justify-content: center;
+    border: unset;
+    border-radius: .25rem;
+
+    span {
+      font-weight: bold;
+      color: var(--color-light);
+    }
+
+    cin-icon {
+      color: var(--color-light);
+    }
+  }
+}
+
+#whatsapp {
+  background-color: #25D366
+}
+
+#twitter {
+  background-color: #00acee
+}
+
+#email {
+  background-color: #FF961C
+}
+
+#copy {
+  background-color: #607D8B
+}
+
+#telegram {
+  background-color: #0088cc
+}
+
+#facebook {
+  background-color: #4267B2
+}
+
+#sms {
+  background-color: #20c16c
+}
+
+#print {
+  background-color: #765AA2
+}
+
+#messenger {
+  background-color: #0080FF
+}
+
+#linkedin {
+  background-color: #006fa6
+}

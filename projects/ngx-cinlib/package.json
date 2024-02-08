@@ -32,6 +32,7 @@
     "@ckeditor/ckeditor5-build-classic": "^37.1.0",
     "cinlib-charts": "^20.5.0",
     "ng-hcaptcha": "^2.3.1",
+    "ngx-sharebuttons": "^12.0.0",
     "tslib": "^2.3.0"
   },
   "overrides": {
@@ -49,6 +50,7 @@
     "@ckeditor/ckeditor5-angular",
     "@ckeditor/ckeditor5-build-classic",
     "cinlib-charts",
-    "ng-hcaptcha"
+    "ng-hcaptcha",
+    "ngx-sharebuttons"
   ]
 }

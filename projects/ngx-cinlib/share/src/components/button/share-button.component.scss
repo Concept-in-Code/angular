@@ -1,0 +1,24 @@
+button {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.mat-mdc-button {
+  border-radius: unset;
+}
+
+.mdc-button {
+  padding: 0 1rem;
+  min-width: 2rem;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  span {
+    font-size: .875rem;
+    font-weight: 400;
+  }
+}
