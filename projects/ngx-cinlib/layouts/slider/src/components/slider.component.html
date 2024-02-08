@@ -1,0 +1,19 @@
+<div class="container" #container>
+
+  <section>
+    <button mat-button (click)="scroll()" [disabled]="disableLeft">
+      <cin-icon [icon]="['fas', 'chevron-left']" [size]="'2x'"></cin-icon>
+    </button>
+  </section>
+
+  <section #content (scroll)="onScroll()">
+    <ng-content></ng-content>
+  </section>
+
+  <section>
+    <button mat-button (click)="scroll(true)" [disabled]="disableRight">
+      <cin-icon [icon]="['fas', 'chevron-right']" [size]="'2x'"></cin-icon>
+    </button>
+  </section>
+
+</div>

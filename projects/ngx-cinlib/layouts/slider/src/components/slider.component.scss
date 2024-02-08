@@ -1,0 +1,45 @@
+@import '../../../../styles//mobile_mixins.scss';
+
+.container {
+  display: flex;
+  overflow: hidden;
+
+  :first-child,
+  :last-child {
+    display: flex;
+
+    button {
+      height: 100% !important;
+      transition: ease-out .4s;
+
+      cin-icon {
+        color: var(--color-gray);
+      }
+
+      &:hover {
+        cin-icon {
+          color: var(--color-dark-gray);
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    .mat-mdc-button {
+      --mat-mdc-button-persistent-ripple-color: transparent;
+      --mat-mdc-button-ripple-color: transparent;
+    }
+
+    @include responsive(tablet) {
+      display: none;
+    }
+  }
+
+  :nth-child(2) {
+    display: flex;
+    padding: .5rem .5rem 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+  }
+
+}
