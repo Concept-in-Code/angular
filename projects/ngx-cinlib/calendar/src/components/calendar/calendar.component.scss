@@ -1,0 +1,37 @@
+@import '../../../../styles/mobile_mixins.scss';
+
+mat-card {
+  width: 40rem;
+}
+
+:host ::ng-deep {
+  .mat-calendar-body-cell:not(.mat-calendar-body-disabled) {
+    &>.mat-calendar-body-cell-content {
+      background-color: var(--color-primary-500) !important;
+      color: var(--color-primary-contrast-500) !important;
+      font-weight: bold;
+    }
+  }
+
+  .mat-calendar-body-cell {
+    top: 25% !important;
+    left: 25% !important;
+    width: 50% !important;
+    height: 50% !important;
+
+    @include responsive(phone) {
+      top: 5% !important;
+      left: 5% !important;
+      width: 90% !important;
+      height: 90% !important;
+    }
+  }
+}
+
+mat-calendar{
+  min-width: 25rem;
+
+  @include responsive(phone){
+    min-width: 60vw;
+  }
+}
