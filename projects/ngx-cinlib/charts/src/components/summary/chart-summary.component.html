@@ -1,0 +1,11 @@
+<mat-card [style]="'background-color: ' + backgroundColor">
+  <section>
+    <span [i18nLabel]="titleLabel"></span>
+
+    <h2>{{ value }} {{ unit }}</h2>
+  </section>
+
+  <cin-chart-actions
+    [actions]="actions">
+  </cin-chart-actions>
+</mat-card>

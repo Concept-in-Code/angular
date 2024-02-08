@@ -1,0 +1,23 @@
+@if (actions?.length === 1) {
+  <button mat-button
+    (click)="actions![0].clicked()"
+    [cinTooltip]="actions![0].label">
+    <cin-icon [icon]="['far', actions![0].icon]" [size]="'xl'"></cin-icon>
+  </button>
+} @else {
+  <button mat-button [matMenuTriggerFor]="menu"
+    (click)="$event.stopPropagation()">
+    <cin-icon [icon]="['fas', 'ellipsis-vertical']" [size]="'xl'"></cin-icon>
+  </button>
+  
+  <mat-menu #menu="matMenu">
+    @for (action of actions; track action) {
+      <button mat-menu-item (click)="action.clicked()">
+        <div class="action-button">
+          <cin-icon [icon]="['far', action.icon]" [size]="'xl'"></cin-icon>
+          <span [i18nLabel]="action.label"></span>
+        </div>
+      </button>
+    }
+  </mat-menu>
+}

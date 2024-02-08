@@ -1,0 +1,10 @@
+button[mat-button] {
+  min-width: 2.5rem !important;
+  border-radius: 50%;
+}
+
+.action-button {
+  display: flex;
+  flex-flow: row;
+  gap: 1rem;
+}

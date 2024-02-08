@@ -4,9 +4,11 @@
     <mat-label i18nLabel="recurrence"></mat-label>
 
     <mat-select [formControl]="control">
-      <mat-option *ngFor="let recurrence of recurrences" [value]="recurrence">
-        <span [i18nLabel]="recurrence"></span>
-      </mat-option>
+      @for (recurrence of recurrences; track recurrence) {
+        <mat-option [value]="recurrence">
+          <span [i18nLabel]="recurrence"></span>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </cin-grid-row>

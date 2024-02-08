@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+
+  mat-card {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: normal;
+    align-items: normal;
+
+    padding: 1rem;
+
+    height: 100%;
+    width: 100%;
+
+    mat-card-title {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+
+    mat-card-content {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      padding: unset;
+      flex: 1;
+      max-height: calc(100% - 2rem);
+    }
+  }
+}

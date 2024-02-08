@@ -8,6 +8,7 @@ import { DatetimeFormComponent } from 'ngx-cinlib/date/datetime-form';
 import { AppValidators } from 'ngx-cinlib/forms/validators';
 import { IconComponent } from 'ngx-cinlib/icons';
 import { GridColumnDirective, GridRowComponent } from 'ngx-cinlib/layouts/grid-layout';
+import { TooltipDirective } from 'ngx-cinlib/tooltip';
 import { Subject, takeUntil } from 'rxjs';
 import { columns, lefthandColumns } from '../../constants/scheduler.constants';
 import { SchedulerService } from '../../services/scheduler.service';
@@ -26,6 +27,7 @@ import { SchedulerOverviewComponent } from '../overview/scheduler-overview.compo
     IconComponent,
     MatButtonModule,
     ReactiveFormsModule,
+    TooltipDirective,
   ]
 })
 export class SchedulerDatetimeComponent implements OnDestroy {

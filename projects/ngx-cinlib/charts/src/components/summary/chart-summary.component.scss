@@ -1,0 +1,28 @@
+mat-card {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 1rem;
+
+  height: 5rem;
+  min-width: 15rem;
+  padding: 1rem;
+
+  section {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    span {
+      white-space: nowrap;
+    }
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  app-chart-actions {
+    align-self: flex-end;
+  }
+}

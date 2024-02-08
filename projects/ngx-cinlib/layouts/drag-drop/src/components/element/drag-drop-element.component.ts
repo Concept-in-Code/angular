@@ -3,6 +3,7 @@ import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { Maybe } from 'ngx-cinlib/core';
 import { I18nDirective } from 'ngx-cinlib/i18n';
 import { IconComponent } from 'ngx-cinlib/icons';
+import { TooltipDirective } from 'ngx-cinlib/tooltip';
 
 @Component({
   selector: 'cin-drag-drop-element',
@@ -12,7 +13,8 @@ import { IconComponent } from 'ngx-cinlib/icons';
   imports: [
     CommonModule,
     IconComponent,
-    I18nDirective
+    I18nDirective,
+    TooltipDirective,
   ]
 })
 export class DragDropElementComponent {

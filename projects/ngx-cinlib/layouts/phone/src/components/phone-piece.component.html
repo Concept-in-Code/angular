@@ -1,6 +1,9 @@
-<div *ngIf="phone">
-  <cin-icon [icon]="['fas', 'phone']"></cin-icon>
-  <a [href]="'tel:' + phone">
-  <span class="piece">{{phone}}</span>
-  </a>
-</div>
+@if (phone) {
+  <div>
+    <cin-icon [icon]="['fas', 'phone']"></cin-icon>
+
+    <a [href]="'tel:' + phone">
+      <span class="piece">{{phone}}</span>
+    </a>
+  </div>
+}

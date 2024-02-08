@@ -26,7 +26,9 @@
         </button>
       </div>
   
-      <mat-divider *ngIf="!last"></mat-divider>
+      @if (!last) {
+        <mat-divider></mat-divider>
+      }
     </article>
   }
 </mat-dialog-content>

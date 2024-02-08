@@ -1,8 +1,18 @@
 <section>
   <cin-icon [icon]="['far', 'calendar']" [size]="'lg'"></cin-icon>
-  <div *ngIf="date">
-    <time class="piece" *ngIf="dateTime">{{ date | localDate: 'medium' }}</time>
-    <time class="piece" *ngIf="!dateTime">{{ date | localDate: 'short' }}</time>
-  </div>
-  <span class="piece" *ngIf="!date" i18nLabel="schedulesInThePast"></span>
+  @if (date) {
+    <div>
+      @if (dateTime) {
+        <time class="piece">{{ date | localDate: 'medium' }}</time>
+      }
+
+      @if (!dateTime) {
+        <time class="piece">{{ date | localDate: 'short' }}</time>
+      }
+    </div>
+  }
+
+  @if (!date) {
+    <span class="piece" i18nLabel="schedulesInThePast"></span>
+  }
 </section>
