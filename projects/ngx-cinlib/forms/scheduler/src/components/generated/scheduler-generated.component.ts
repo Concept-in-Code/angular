@@ -36,7 +36,9 @@ export class SchedulerGeneratedComponent {
   }
 
   public show(): void {
-    this.dialog.open(SchedulerOverviewComponent);
+    this.dialog.open(SchedulerOverviewComponent, {
+      data: this.schedulerService
+    });
   }
 
 }
