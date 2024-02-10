@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 1rem);
+  padding: 0.5rem;
+}
+
+section {
+  background-color: white;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-flow: column;
+  border-radius: var(--mdc-shape-small);
+
+  p, div{
+    text-align: center;
+  }
+
+}

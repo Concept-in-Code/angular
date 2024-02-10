@@ -1,0 +1,23 @@
+<section>
+  <p>
+    <small i18nLabel="contentHostedByThirdParty"></small>
+    <small i18nLabel="byShowAcceptTermsAndCondition"></small>
+  </p>
+  <p>
+    <b>{{ externalUrl }}</b>
+  </p>
+  <div>
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      (click)="loadExternalContent($event)">
+      <span i18nLabel="showContent"></span>
+    </button>
+  </div>
+  <div>
+    <mat-checkbox (click)="$event.stopPropagation();" [(ngModel)]="rememberConsent">
+      <span i18nLabel="rememberChoice"></span>
+    </mat-checkbox>
+  </div>
+</section>

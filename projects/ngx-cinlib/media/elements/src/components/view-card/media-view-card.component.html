@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <cin-media-element
+      (clicked)="click()"
+      [media]="media">
+    </cin-media-element>
+  </mat-card-header>
+
+  <mat-card-content>
+    <h3>{{ media?.name }}</h3>
+    <ng-container [ngSwitch]="mimeType">
+      <button *ngSwitchCase="'VIDEO'" mat-button (click)="click()">
+        <cin-icon [icon]="['fas', 'play']"></cin-icon>
+      </button>
+      <button *ngSwitchCase="'IMAGE'" mat-button (click)="click()">
+        <cin-icon [icon]="['fas', 'eye']"></cin-icon>
+      </button>
+      <button *ngSwitchDefault
+        mat-button (click)="download($event)">
+        <div>
+          <span>{{ media?.size | fileSize }}</span>
+          <cin-icon [icon]="['fas', 'download']"></cin-icon>
+        </div>
+      </button>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

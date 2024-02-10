@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+
+div:first-child {
+  display: flex;
+  flex-flow: column;
+}
+
+div:last-of-type {
+  section {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+  }
+}

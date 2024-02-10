@@ -1,0 +1,31 @@
+@import '../../../../../styles/mobile_mixins.scss';
+
+.main {
+  display: flex;
+  flex-flow: column;
+  gap: var(--gap);
+}
+
+section {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.5rem;
+
+  @include responsive(phone) {
+    justify-content: center;
+  }
+
+  button {
+    color: var(--color-dark-gray);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+  }
+}
+
+section:first-of-type {
+  justify-content: space-between;
+}

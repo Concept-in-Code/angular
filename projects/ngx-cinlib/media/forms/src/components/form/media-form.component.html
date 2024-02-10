@@ -1,0 +1,19 @@
+<section class="media">
+  <cin-media-action-card *ngFor="let element of media; let i = index;"
+    actionLabel="details"
+    [media]="retrieveMedia(element)"
+    [showDelete]="true"
+    (action)="edit(i)"
+    (deleted)="remove(i)">
+  </cin-media-action-card>
+
+  <cin-media-form-entry *ngIf="!this.maxFiles || this.media.length < this.maxFiles"
+    (uploads)="add($event)">
+  </cin-media-form-entry>
+</section>
+
+<section class="errors" *ngIf="validationErrors.length">
+  <ng-container *ngFor="let error of validationErrors">
+    <mat-error [i18nLabel]="error"></mat-error>
+  </ng-container>
+</section>

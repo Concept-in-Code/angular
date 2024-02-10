@@ -1,0 +1,31 @@
+@if (!mode) {
+  <mat-card>
+    <section
+      (click)="mode = 'UPLOAD'"
+      i18nLabel="uploadFile"
+      [class.disabled]="isDisabled">
+    </section>
+    
+    <mat-divider></mat-divider>
+    
+    <section
+      (click)="mode = 'URL'"
+      i18nLabel="includeMediaViaMedia"
+      [class.disabled]="isDisabled">
+    </section>
+  </mat-card>
+}
+
+@if (mode === 'UPLOAD') {
+  <cin-media-form-upload
+    (back)="mode = undefined"
+    (uploads)="emit($event)">
+  </cin-media-form-upload>
+}
+
+@if (mode === 'URL') {
+  <cin-media-form-url
+    (back)="mode = undefined"
+    (upload)="emit([$event])">
+  </cin-media-form-url>
+}

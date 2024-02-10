@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  gap: 1rem;
+}
+
+cin-icon {
+  display: flex;
+  align-self: center;
+}
+
+a {
+  color: var(--color-black);
+}
+
+address {
+  width: max-content;
+}

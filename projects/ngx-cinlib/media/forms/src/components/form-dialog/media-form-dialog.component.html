@@ -1,0 +1,20 @@
+<mat-dialog-content>
+  <cin-media-form
+    [maxFiles]="1"
+    (uploads)="media = $event">
+  </cin-media-form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button
+    mat-dialog-close
+    i18nLabel="cancel">
+  </button>
+
+  <button mat-raised-button
+    color="primary"
+    i18nLabel="confirm"
+    [disabled]="!media.length"
+    [mat-dialog-close]="media">
+  </button>
+</mat-dialog-actions>

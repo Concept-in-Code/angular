@@ -1,0 +1,62 @@
+<div *ngIf="(titleLabel || link || title) && media?.length">
+  
+  <ng-container *ngIf="titleType === 'DETAILS'">
+    <cin-details-title *ngIf="title; else detailsTitleLabel"
+      [link]="link"
+      [linkLabel]="linkLabel"
+      [title]="title">
+    </cin-details-title>
+    <ng-template #detailsTitleLabel>
+      <cin-details-title [titleLabel]="titleLabel"></cin-details-title>
+    </ng-template>
+  </ng-container>
+
+  <ng-container *ngIf="titleType === 'SUBTITLE'">
+    <cin-sub-title *ngIf="title; else subTitleLabel" 
+      [link]="link"
+      [title]="title">
+    </cin-sub-title>
+    <ng-template #subTitleLabel>
+      <cin-sub-title [titleLabel]="titleLabel"></cin-sub-title>
+    </ng-template>
+  </ng-container>
+
+  <ng-container *ngIf="titleType === 'PAGE'">
+    <cin-page-title *ngIf="titleLabel; else pageTitleLabel" [titleLabel]="titleLabel"></cin-page-title>
+    <ng-template #pageTitleLabel>
+      <cin-page-title *ngIf="title" [title]="title"></cin-page-title>
+    </ng-template>
+  </ng-container>
+  
+  <a *ngIf="link"
+    class="link"
+    [routerLink]="link"
+    [i18nLabel]="linkLabel" suffix="»">
+  </a>
+</div>
+
+<ng-container *ngIf="mediaCardType === 'VIEW'">
+  <cin-slider *ngIf="media?.length">
+    <ng-container *ngFor="let element of media">
+      <cin-media-view-card 
+        [media]="element"
+        (clicked)="open(element)"
+        (deleted)="delete($event)">
+      </cin-media-view-card>
+    </ng-container>
+  </cin-slider>
+</ng-container>
+
+<ng-container *ngIf="mediaCardType === 'ACTION'">
+  <cin-slider *ngIf="media?.length">
+    <ng-container *ngFor="let element of media">
+      <cin-media-action-card
+        [actionLabel]="actionLabel"
+        [media]="element"
+        [showDelete]="true"
+        (action)="action($event)"
+        (deleted)="delete($event)">
+      </cin-media-action-card>
+    </ng-container>
+  </cin-slider>
+</ng-container>

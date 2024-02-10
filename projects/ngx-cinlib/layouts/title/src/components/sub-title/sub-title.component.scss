@@ -1,0 +1,14 @@
+@import '../../../../../styles/mobile_mixins.scss';
+
+h1 {
+  margin-bottom: 2rem !important;
+}
+
+.mat-headline-4 {
+  @include responsive(tablet) {
+    font-size: 1.5rem;
+    letter-spacing: 0em;
+    line-height: 2.25rem;
+    font-weight: 500;
+  }
+}

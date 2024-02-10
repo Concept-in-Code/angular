@@ -1,0 +1,13 @@
+<div>
+  <h1 *ngIf="titleLabel" class="mat-headline-6"
+    [i18nLabel]="titleLabel"></h1>
+  <h1 *ngIf="title" class="mat-headline-6">{{ title }}</h1>
+  <section *ngIf="link && !linkIcon">
+    <a [routerLink]="link" [i18nLabel]="linkLabel" suffix="»"></a>
+  </section>
+  <section *ngIf="linkIcon">
+    <span [routerLink]="link">
+      <cin-icon [icon]="['fas', linkIcon ]"></cin-icon>
+    </span>
+  </section>
+</div>

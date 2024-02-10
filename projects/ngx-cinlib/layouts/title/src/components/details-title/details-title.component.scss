@@ -1,0 +1,25 @@
+@import '../../../../../styles/mobile_mixins.scss';
+
+h1 {
+  margin-bottom: 0 !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  
+  @include responsive(phone) {
+    font-size: 1.125rem !important;  
+  }
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  padding-bottom: .5rem;
+}
+
+cin-icon {
+  cursor: pointer;
+}

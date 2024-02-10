@@ -1,0 +1,39 @@
+<button mat-button (click)="closeDialog()">
+  <cin-icon [icon]="['fas', 'xmark']" [size]="'2x'"></cin-icon>
+</button>
+
+<div (click)="closeDialog()" class="content-area">
+  <button *ngIf="data.media.length > 1"
+    mat-button
+    (click)="previous($event)">
+    <cin-icon [icon]="['fas', 'chevron-left']" [size]="'2x'"></cin-icon>
+  </button>
+
+  <div [ngSwitch]="mimeType" class="content">
+      <audio *ngSwitchCase="'AUDIO'" controls>
+        <source [src]="currentMedia?.url" [type]="currentMedia?.mimeType">
+      </audio>
+  
+      <img *ngSwitchCase="'IMAGE'"
+        [src]="currentMedia?.url"
+        [cinAttribution]="currentMedia?.attribution"/>
+  
+      <cin-media-view-card *ngSwitchCase="'PDF'"
+        [media]="currentMedia">
+      </cin-media-view-card>
+  
+      <cin-media-view-card *ngSwitchCase="'WORD'"
+        [media]="currentMedia">
+      </cin-media-view-card>
+  
+      <cin-media-video [media]="currentMedia"
+      *ngSwitchCase="'VIDEO'">
+      </cin-media-video>
+  </div>
+
+  <button *ngIf="data.media.length > 1"
+    mat-button
+    (click)="next($event)">
+    <cin-icon [icon]="['fas', 'chevron-right']" [size]="'2x'"></cin-icon>
+  </button>
+</div>

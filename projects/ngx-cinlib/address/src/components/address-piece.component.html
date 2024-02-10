@@ -1,0 +1,16 @@
+@if (address) {
+  <div>
+    <cin-icon [icon]="['fas', 'location-dot']" [size]="'xl'"></cin-icon>
+    <address class="piece" [innerHtml]="address | address" (click)="onClick()">
+    </address>
+  </div>
+}
+
+@if (link) {
+  <div>
+    <cin-icon [icon]="['fas', 'link']" [size]="'xl'"></cin-icon>
+    <a [href]="link">
+      <span appLabel="toTheRoom"></span>
+    </a>
+  </div>
+}

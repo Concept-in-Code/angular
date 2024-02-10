@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="mimeType">
+  <div *ngSwitchCase="'IMAGE'"
+    (click)="click()"
+    class="image-wrapper">
+    <img alt="media-card"
+      [src]="media?.url"
+      [cinAttribution]="media?.attribution" [direction]="attributionDirection" />
+  </div>
+
+  <cin-media-video *ngSwitchCase="'VIDEO'"
+    (click)="click()"
+    [media]="media">
+  </cin-media-video>
+
+  <cin-icon *ngSwitchCase="'WORD'"
+    [icon]="['far', 'file-word']" [size]="'5x'" [style.color]="'var(--color-ms-word)'">
+  </cin-icon>
+
+  <cin-icon *ngSwitchCase="'PDF'"
+    [icon]="['far', 'file-pdf']" [size]="'5x'" [style.color]="'var(--color-pdf)'">
+  </cin-icon>
+
+  <cin-icon *ngSwitchDefault
+    [icon]="['far', 'file']" [size]="'5x'">
+  </cin-icon>
+</ng-container>

@@ -1,0 +1,23 @@
+
+<div
+  [class.dragged]="isDraggedOver"
+  [class.disabled]="disabled">
+  <button mat-icon-button
+    (click)="back.emit()">
+    <cin-icon [icon]="['fas', 'arrow-left']"></cin-icon>
+  </button>
+  <input type="file"
+    multiple
+    [disabled]="disabled"
+    (change)="onFileBrowse($event)" />
+  <section>
+    <cin-icon [icon]="['fas', 'upload']" [size]="'3x'"></cin-icon>
+    <span i18nLabel="dragAndDropHere"></span>
+  </section>
+  <span i18nLabel="or"></span>
+  <button mat-raised-button
+    color="primary"
+    [disabled]="disabled">
+    <span i18nLabel="browseFiles"></span>
+  </button>
+</div>

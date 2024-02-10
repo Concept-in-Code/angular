@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  object-fit: contain;
+}
+
+img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1.75rem;
+  aspect-ratio: 1 / 1;
+
+  color: var(--color-accent-contrast-900);
+  background: linear-gradient(135deg, var(--color-accent-900), var(--color-accent-400));
+}

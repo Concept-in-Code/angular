@@ -1,0 +1,100 @@
+<h1 mat-dialog-title i18nLabel="editFile"></h1>
+<div mat-dialog-content [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-accordion>
+    <mat-expansion-panel hideToggle expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          i18nLabel="enterFurtherDetails">
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="expansion-content">
+
+        <ng-container formGroupName="media">
+          <mat-form-field appearance="outline">
+            <mat-label i18nLabel="name"></mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline" *ngIf="displayUrl">
+            <mat-label i18nLabel="enterUrl"></mat-label>
+            <input matInput formControlName="url">
+          </mat-form-field>
+  
+          <mat-error *ngIf="form.controls.media.controls.url.errors && displayUrl"
+            i18nLabel="enterValidUrl">
+          </mat-error>
+        </ng-container>
+      
+        <ng-container *ngIf="(data.displayCardToggle || data.displayTitleToggle) && isMediaMimeType">
+          <mat-divider>
+          </mat-divider>
+
+          <mat-slide-toggle *ngIf="data?.displayCardToggle"
+            formControlName="card">
+            <span i18nLabel="displayAsCardImage"></span>
+          </mat-slide-toggle>
+        
+          <mat-slide-toggle *ngIf="data?.displayTitleToggle"
+            formControlName="title">
+            <span i18nLabel="displayAsTitleImage"></span>
+          </mat-slide-toggle>
+        </ng-container>
+      
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          i18nLabel="authorAttribution">
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <ng-container formGroupName="media">
+        <div class="expansion-content" formGroupName="attribution">
+          <span i18nLabel="imageAttributionDescription"></span>
+          <a href="https://wiki.creativecommons.org/wiki/best_practices_for_attribution"
+              target="_blank">
+            <span i18nLabel="imageAttributionFurtherInfo"></span>
+          </a>
+  
+          <mat-form-field appearance="outline">
+            <mat-label i18nLabel="title"></mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label i18nLabel="author"></mat-label>
+            <input matInput formControlName="author">
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label i18nLabel="source"></mat-label>
+            <input matInput formControlName="source">
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label i18nLabel="license"></mat-label>
+            <input matInput formControlName="license">
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button
+    mat-dialog-close
+    i18nLabel="cancel">
+  </button>
+
+  <button mat-flat-button
+    [disabled]="form.controls.media.controls.url.errors && displayUrl"
+    color="primary"
+    mat-dialog-close
+    i18nLabel="confirm"
+    (click)="onSubmit()">
+  </button>
+</div>

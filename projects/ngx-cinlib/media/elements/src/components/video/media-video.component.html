@@ -1,0 +1,22 @@
+<ng-container *ngIf="media">
+  <ng-container *ngIf="youtubeUrl; else videoTemplate">
+    <ng-container *ngIf="allowExternalContent; else frameTemplate">
+      <iframe [src]="url" frameborder="0" allow="fullscreen;">
+      </iframe>
+    </ng-container>
+    <ng-template  #frameTemplate>
+      <cin-media-external-consent
+        [externalUrl]="getHostname()"
+        (allowed)="allowExternalContent = true">
+      </cin-media-external-consent>
+    </ng-template>
+
+  </ng-container>
+  <ng-template #videoTemplate>
+    <video controls #video>
+      <source
+        [type]="media.mimeType"
+        [src]="url"/>
+    </video>
+  </ng-template>
+</ng-container>

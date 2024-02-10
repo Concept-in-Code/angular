@@ -1,0 +1,40 @@
+<div class="main">
+  <cin-page-title titleLabel="media"></cin-page-title>
+
+  <section>
+    <cin-radio-button-group
+      [inputs]="inputs"
+      [value]="fileType"
+      (valueChanged)="fileType = $event">
+    </cin-radio-button-group>
+    <button mat-raised-button (click)="routeBack()">
+      <span>
+        <cin-icon [icon]="['fas', 'arrow-left']" [size]="'xs'"></cin-icon>
+        <span [i18nLabel]="backLabel"></span>
+      </span>
+    </button>
+  </section>
+
+  <section>
+    <ng-container [ngSwitch]="fileType">
+
+      <ng-container *ngSwitchCase="'image'">
+        <cin-media-view-card *ngFor="let element of images; let i = index;"
+          [media]="element" (clicked)="openViewer(i, images)">
+        </cin-media-view-card>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'file'">
+        <cin-media-view-card *ngFor="let element of files" [media]="element">
+        </cin-media-view-card>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'video'" >
+        <cin-media-view-card *ngFor="let element of videos; let i = index;"
+          [media]="element" (clicked)="openViewer(i, videos)">
+        </cin-media-view-card>
+      </ng-container>
+
+    </ng-container>
+  </section>
+</div>

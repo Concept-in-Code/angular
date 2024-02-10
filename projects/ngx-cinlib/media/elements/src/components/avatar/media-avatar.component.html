@@ -1,0 +1,4 @@
+<img class="border-image" *ngIf="media" [src]="media.url">
+<span class="border-image" *ngIf="!media">
+  {{ user?.user?.firstName?.charAt(0) || user?.user?.lastName?.charAt(0) }}
+</span>

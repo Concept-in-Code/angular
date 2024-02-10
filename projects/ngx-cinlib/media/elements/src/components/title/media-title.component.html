@@ -1,0 +1,7 @@
+<div *ngIf="!media" class="gradient"></div>
+<ng-container *ngIf="media">
+  <cin-media-element
+    [media]="media"
+    [attributionDirection]="'TOP-RIGHT'">
+  </cin-media-element>
+</ng-container>
