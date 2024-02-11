@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { Maybe, Media } from 'ngx-cinlib/core';
@@ -18,7 +18,7 @@ import { MediaElementComponent } from '../element/media-element.component';
     FileSizePipe,
     IconComponent,
     MatCardModule,
-    MediaElementComponent,
+    forwardRef(() => MediaElementComponent),
   ]
 })
 export class MediaViewCardComponent implements OnInit {
