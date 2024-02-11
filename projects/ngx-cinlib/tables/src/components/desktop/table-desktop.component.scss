@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: var(--gap);
+
+  mat-card {
+    overflow: hidden;
+    width: 100%;
+    display: inline-block;
+    box-sizing: content-box;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+:host ::ng-deep {
+  .mat-mdc-table > thead {
+    background-color: var(--color-light) !important;
+  }
+
+  .mat-mdc-table .mat-mdc-row:hover{
+    background-color: var(--color-lightest);
+  }
+
+  .mdc-data-table__cell, .mdc-data-table__header-cell{
+    padding: 0 .75rem;
+  }
+}
+

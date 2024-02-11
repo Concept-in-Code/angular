@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Maybe } from 'ngx-cinlib/core';
 import { RadioButtonComponent, RadioButtonInput } from 'ngx-cinlib/forms/radio-button';
-import { AppValidators } from 'ngx-cinlib/forms/validators';
+import { CinValidators } from 'ngx-cinlib/forms/validators';
 import { I18nDirective } from 'ngx-cinlib/i18n';
 import { GridColumnDirective, GridRowComponent } from 'ngx-cinlib/layouts/grid-layout';
 import { Subject, takeUntil } from 'rxjs';
@@ -39,8 +39,8 @@ export class SchedulerRecurrenceEndComponent implements OnDestroy {
     recurrenceAfterTimes: [undefined as Maybe<number>, [Validators.min(0)]],
   }, {
     validators: [
-      AppValidators.ifMatchValueOtherFilled('recurrenceEnd', 'until', 'recurrenceUntil'),
-      AppValidators.ifMatchValueOtherFilled('recurrenceEnd', 'after', 'recurrenceAfterTimes'),
+      CinValidators.ifMatchValueOtherFilled('recurrenceEnd', 'until', 'recurrenceUntil'),
+      CinValidators.ifMatchValueOtherFilled('recurrenceEnd', 'after', 'recurrenceAfterTimes'),
     ]
   });
 

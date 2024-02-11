@@ -1,0 +1,42 @@
+@if ((inlineEditActive | async) && row?.id === (inlineEditRow | async)?.id) {
+  <button mat-button
+    class="save"
+    cinTooltip="save"
+    (click)="$event.stopPropagation(); saveInlineEdit();">
+    <cin-icon [icon]="['fas', 'check']"></cin-icon>
+  </button>
+
+  <button mat-button
+    cinTooltip="cancel"
+    (click)="$event.stopPropagation(); cancelInlineEdit();">
+    <cin-icon [icon]="['fas', 'xmark']"></cin-icon>
+  </button>
+
+} @else {
+  <button *ngIf="inlineEditAction"
+    mat-button
+    [cinTooltip]="inlineEditAction.tooltipLabel"
+    (click)="$event.stopPropagation(); enableInlineEdit();">
+    <cin-icon [icon]="['fas', inlineEditAction.icon]"></cin-icon>
+  </button>
+
+  @for (action of (actions | async); track action) {
+
+    @if(actionComponent(action); as action) {
+      <ng-container>
+        <ng-container *ngComponentOutlet="action.component; inputs: action.inputs">
+        </ng-container>
+      </ng-container>
+    } @else {
+      <div [class.disabled]="isDisabled(action)">
+        <button id="button" *ngIf="hasPrivileges(action)"
+          mat-button
+          [disabled]="isDisabled(action)"
+          (click)="$event.stopPropagation(); callback(action);"
+          [cinTooltip]="tooltip(action)">
+          <cin-icon [icon]="['fas', icon(action)]"></cin-icon>
+        </button>
+      </div>
+    }
+  }
+}

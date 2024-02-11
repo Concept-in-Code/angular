@@ -1,0 +1,39 @@
+<div #container>
+
+  <!-- TODO: Add cin-table-sort in mobile-->
+
+  <mat-card *ngFor="let row of (data | async)?.result;">
+    <mat-card-title (click)="rowClicked(row);"
+      [class.clickable]="clickable | async">
+      <div *ngIf="(columns | async) as columns"
+        [cinRow]="row"
+        [column]="columns
+          ? columns[0]
+          : undefined">
+      </div>
+    </mat-card-title>
+
+    <mat-card-content (click)="rowClicked(row);"
+      [class.clickable]="clickable | async">
+      <ng-container *ngFor="let column of (columns | async); let first = first">
+        <section *ngIf="!first">
+          <span [cinRow]="row" [column]="column"></span>
+          <small [i18nLabel]="column.label"></small>
+        </section>
+      </ng-container>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <cin-table-actions
+      [row]="row">
+    </cin-table-actions>
+  </mat-card>
+
+  <mat-card class="paginator">
+    <cin-table-paginator
+      [length]="(data | async)?.total"
+      [pageSize]="10">
+    </cin-table-paginator>
+  </mat-card>
+</div>

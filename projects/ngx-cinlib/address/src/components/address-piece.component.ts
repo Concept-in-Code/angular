@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Maybe } from 'ngx-cinlib/core';
+import { I18nDirective } from 'ngx-cinlib/i18n';
 import { IconComponent } from 'ngx-cinlib/icons';
 import { AddressPipe } from '../pipes/address.pipe';
 import { Address } from '../typings/address';
@@ -14,6 +15,7 @@ import { Address } from '../typings/address';
     AddressPipe,
     CommonModule,
     IconComponent,
+    I18nDirective,
   ]
 })
 export class AddressPieceComponent {

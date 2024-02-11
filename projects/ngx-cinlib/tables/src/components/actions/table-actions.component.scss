@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.save {
+  cin-icon {
+    color: var(--color-success-500);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  cin-icon {
+    color: var(--color-gray);
+  }
+
+}
+
+#button {
+  display: flex;
+  justify-content: center;
+  min-width: 2.875rem;
+}

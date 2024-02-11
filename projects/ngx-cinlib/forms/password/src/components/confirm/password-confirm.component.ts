@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validator, Validators } from '@angular/forms';
 import { Maybe } from 'ngx-cinlib/core';
-import { AppValidators } from 'ngx-cinlib/forms/validators';
+import { CinValidators } from 'ngx-cinlib/forms/validators';
 import { I18nDirective } from 'ngx-cinlib/i18n';
 import { Subject, takeUntil } from 'rxjs';
 import { PasswordService } from '../../services/password.service';
@@ -48,7 +48,7 @@ export class PasswordConfirmComponent implements ControlValueAccessor, OnDestroy
     confirm: ['',
       [Validators.required]
     ]
-  }, {validators: AppValidators.same('password', 'confirm')});
+  }, {validators: CinValidators.same('password', 'confirm')});
 
   get valid(): boolean {
     return this.form.valid;

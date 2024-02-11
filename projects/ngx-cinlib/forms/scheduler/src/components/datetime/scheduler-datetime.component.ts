@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { Maybe } from 'ngx-cinlib/core';
 import { DatetimeFormComponent } from 'ngx-cinlib/date/datetime-form';
-import { AppValidators } from 'ngx-cinlib/forms/validators';
+import { CinValidators } from 'ngx-cinlib/forms/validators';
 import { IconComponent } from 'ngx-cinlib/icons';
 import { GridColumnDirective, GridRowComponent } from 'ngx-cinlib/layouts/grid-layout';
 import { TooltipDirective } from 'ngx-cinlib/tooltip';
@@ -44,7 +44,7 @@ export class SchedulerDatetimeComponent implements OnDestroy {
     startDate: [undefined as Maybe<Date>],
     endDate: [undefined as Maybe<Date>],
   }, {
-    validators: [AppValidators.dateBefore('startDate', 'endDate')]
+    validators: [CinValidators.dateBefore('startDate', 'endDate')]
   });
 
   private destroy = new Subject<void>();

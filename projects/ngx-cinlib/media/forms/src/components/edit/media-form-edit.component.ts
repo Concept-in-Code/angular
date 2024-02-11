@@ -7,7 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Maybe, Media } from 'ngx-cinlib/core';
-import { AppValidators } from 'ngx-cinlib/forms/validators';
+import { CinValidators } from 'ngx-cinlib/forms/validators';
 import { I18nDirective } from 'ngx-cinlib/i18n';
 import { MediaApiService, MediaEditDialogData, MediaEnhanced, MediaService } from 'ngx-cinlib/media/common';
 import { take } from 'rxjs';
@@ -36,7 +36,7 @@ export class MediaFormEditComponent {
     media: this.fb.group({
       id: [''],
       name: [''],
-      url: ['', [AppValidators.validUrl()]],
+      url: ['', [CinValidators.validUrl()]],
       attribution: this.fb.group({
         id: [''],
         title: [''],

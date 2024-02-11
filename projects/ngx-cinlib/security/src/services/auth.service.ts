@@ -3,7 +3,7 @@ import { FetchResult } from '@apollo/client/core';
 import { Maybe } from 'ngx-cinlib/core';
 import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { APP_AUTH_TOKENS } from '../constants/inject-tokens';
+import { CIN_AUTH_TOKENS } from '../constants/inject-tokens';
 import { refreshKey } from '../constants/refresh';
 import { Token } from '../typings/token';
 import { Tokens } from '../typings/tokens';
@@ -29,7 +29,7 @@ export class AuthService {
 
   constructor(
     private readonly injector: Injector,
-    @Inject(APP_AUTH_TOKENS)
+    @Inject(CIN_AUTH_TOKENS)
     public initTokens: Tokens,
   ) {
     this.tokens = { ...initTokens };

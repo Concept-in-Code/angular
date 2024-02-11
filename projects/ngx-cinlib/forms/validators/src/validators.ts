@@ -6,7 +6,7 @@ import { isValidUrl } from 'ngx-cinlib/utils';
 @Injectable({
   providedIn: 'root',
 })
-export class AppValidators {
+export class CinValidators {
   /**
    *
    * CONTROL VALIDATIONS
