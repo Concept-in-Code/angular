@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Maybe, PageableList } from 'ngx-cinlib/core';
 import { setFieldValue } from 'ngx-cinlib/utils';
-import { BehaviorSubject, Observable, combineLatest, debounceTime, map, take } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map, take } from 'rxjs';
 import { Column } from '../typings/column';
 import { RowAction, RowCustomAction } from '../typings/row-action';
 import { SortPaginate } from '../typings/sort-paginate';
@@ -22,7 +22,7 @@ export class TableService {
   private inlineEditActive = new BehaviorSubject<boolean>(false);
   private inlineEditRow = new BehaviorSubject<any>(null);
   
-  private useQueryParams = new BehaviorSubject<boolean>(false);
+  private useQueryParams = new BehaviorSubject<boolean>(true);
   private params = new BehaviorSubject<SortPaginate>({
     page: 0,
     size: 10,
@@ -35,11 +35,8 @@ export class TableService {
     private router: Router,
   ) {
     this.activatedRoute.queryParams
-      .pipe(
-        debounceTime(0), //TODO: Check if this is even necessary
-        take(1)
-      )
-      .subscribe(params => this.params.next(params));
+      .pipe(take(1))
+      .subscribe((params: SortPaginate) => this.setParams(params));
   }
 
   public getActions(): Observable<Maybe<RowAction<any>[]>> {
@@ -149,11 +146,17 @@ export class TableService {
   }
 
   public setParams(params: SortPaginate): void {
-    this.params.next(params);
+    const newParams = {
+      dir: params.dir,
+      page: params.page ?? this.params.value.page,
+      size: params.size ?? this.params.value.size,
+      sort: params.sort
+    };
+    this.params.next(newParams);
 
     if (this.useQueryParams.value) {
       this.router.navigate([], {
-        queryParams: params,
+        queryParams: newParams,
         queryParamsHandling: 'merge',
       })
     }

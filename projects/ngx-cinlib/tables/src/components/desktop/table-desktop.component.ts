@@ -64,7 +64,9 @@ export class TableDesktopComponent<T> implements AfterViewInit, OnDestroy {
         });
       });
 
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.sortChange
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => (this.paginator.pageIndex = 0));
     
     merge(this.sort.sortChange, this.paginator.page).pipe(
       tap(() => this.tableService.setParams({
