@@ -1,7 +1,7 @@
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validator } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,10 +37,20 @@ import { Subject, takeUntil } from 'rxjs';
     ReactiveFormsModule,
   ]
 })
-export class DatetimeFormComponent implements ControlValueAccessor, OnDestroy {
+export class DatetimeFormComponent implements ControlValueAccessor, Validator, OnDestroy {
 
   @Input()
-  public minDate?: Date;
+  public set minDate(date: Maybe<string | Date>) {
+    if (date) {
+      this._minDate = new Date(date);
+    }
+  }
+
+  public get minDate(): Maybe<Date> {
+    return this._minDate;
+  }
+
+  public _minDate?: Date;
 
   @Input()
   public stepMinute = 15;
@@ -64,8 +74,30 @@ export class DatetimeFormComponent implements ControlValueAccessor, OnDestroy {
       });
   }
 
-  public writeValue(date: Date): void {
-    this.control.patchValue(date);
+  public writeValue(date: Date | string): void {
+    date
+      ? this.control.patchValue(new Date(date))
+      : this.control.reset();
+  }
+
+
+  public validate(): ValidationErrors | null {
+    if (!this.valid) {
+      var errors = { ...this.control.errors };
+
+      if ('matDatetimePickerMin' in errors) {
+        errors = {...errors, invalidMinDate: true };
+        delete errors['matDatetimePickerMin'];
+      }
+
+      return errors;
+    } else {
+      return null;
+    }
+  }
+
+  get valid(): boolean {
+    return this.control.valid;
   }
 
   public registerOnChange(onChange: (value: Maybe<Date>) => void): void {

@@ -101,6 +101,21 @@ export class CinValidators {
     };
   }
 
+
+  public static minValue(minValue: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as number;
+      if (value === null || value === undefined || (typeof value === 'string' && value === '')) {
+        return null;
+      }
+
+      if (isNaN(value) || value < minValue) {
+        return { minValue: { requiredValue: minValue, actualValue: value } };
+      }
+      return null;
+    };
+  }
+
   /**
    *
    * GROUP VALIDATIONS
