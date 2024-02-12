@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { isValidUrl } from 'ngx-cinlib/utils';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class CinValidators {
   /**
    *
@@ -13,20 +9,18 @@ export class CinValidators {
    *
    */
 
-  public static decimal(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const pattern = /^-?[0-9]\d*([.,]\d+)?$/;
+  public static decimal(control: AbstractControl): ValidationErrors | null {
+    const pattern = /^-?[0-9]\d*([.,]\d+)?$/;
 
-      if (!control.value) {
-        return null;
-      }
-
-      if (!pattern.test(control.value)) {
-        return { numbersOnly: true };
-      }
-
+    if (!control.value) {
       return null;
-    };
+    }
+
+    if (!pattern.test(control.value)) {
+      return { numbersOnly: true };
+    }
+
+    return null;
   }
 
   public static digits(digits: number): ValidatorFn {
@@ -45,40 +39,22 @@ export class CinValidators {
     };
   }
 
-  public static email(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const pattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  public static email(control: AbstractControl): ValidationErrors | null {
+    const pattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
-      if (!control.value) {
-        return null;
-      }
-
-      if (!pattern.test(control.value)) {
-        return { invalidEmail: true };
-      }
-
+    if (!control.value) {
       return null;
-    };
+    }
+
+    if (!pattern.test(control.value)) {
+      return { invalidEmail: true };
+    }
+
+    return null;
   }
 
-  public static phone(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const pattern = /^[+]*[0-9]+$/;
-      if (!control.value) {
-        return null;
-      }
-
-      if (!pattern.test(control.value)) {
-        return { numbersOnly: true };
-      }
-
-      return null;
-    };
-  }
-
-  public static number(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const pattern = /^[0-9]+$/;
+  public static phone(control: AbstractControl): ValidationErrors | null {
+    const pattern = /^[+]*[0-9]+$/;
       if (!control.value) {
         return null;
       }
@@ -88,17 +64,27 @@ export class CinValidators {
       }
 
       return null;
-    };
   }
 
-  public static validUrl(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!isValidUrl(control.value)) {
-        return { invalidUrl: true };
+  public static number(control: AbstractControl): ValidationErrors | null {
+    const pattern = /^[0-9]+$/;
+      if (!control.value) {
+        return null;
+      }
+
+      if (!pattern.test(control.value)) {
+        return { numbersOnly: true };
       }
 
       return null;
-    };
+  }
+
+  public static validUrl(control: AbstractControl): ValidationErrors | null {
+    if (!isValidUrl(control.value)) {
+      return { invalidUrl: true };
+    }
+
+    return null;
   }
 
 
