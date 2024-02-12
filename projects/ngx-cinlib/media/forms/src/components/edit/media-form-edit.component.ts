@@ -36,7 +36,7 @@ export class MediaFormEditComponent {
     media: this.fb.group({
       id: [''],
       name: [''],
-      url: ['', [CinValidators.validUrl()]],
+      url: ['', [CinValidators.validUrl]],
       attribution: this.fb.group({
         id: [''],
         title: [''],
