@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FeedbackComponent } from '../components/feedback.component';
 import { Feedback, FeedbackType } from '../typings/feedback';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FeedbackService {
 
   constructor(

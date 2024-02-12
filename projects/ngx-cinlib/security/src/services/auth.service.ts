@@ -34,9 +34,9 @@ export class AuthService {
   ) {
     this.tokens = { ...initTokens };
 
-    if (!this.tokens.refresh) {
-      this.clearPerformed.next(true);
-    }
+    // if (!this.tokens.refresh) {
+    //   this.clearPerformed.next(true);
+    // }
   }
 
   public cleared(): Observable<boolean> {
@@ -79,6 +79,10 @@ export class AuthService {
 
   private expired(exp: number | undefined): boolean {
     return !!(!exp || (exp * 1000 - Date.now()) < 0);
+  }
+
+  public refreshExpired(): void {
+    this.clear();
   }
 
   public login(email: string, password: string): Observable<Tokens> {

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Maybe } from 'ngx-cinlib/core';
 import { BehaviorSubject, Observable, combineLatest, filter, isObservable, map, of } from 'rxjs';
+import { languageLocalStorage } from '../constants/i18n.constants';
 import { Language } from '../typings/language';
 import { Translatable } from '../typings/translatable';
 
@@ -10,7 +11,11 @@ export class TranslationService {
 
   private labels = new BehaviorSubject<Map<string, Maybe<Translatable>[]>>(new Map());
 
-  private currentLanguage = new BehaviorSubject<Maybe<Language>>(undefined);
+  private currentLanguage = new BehaviorSubject<Maybe<Language>>({ locale:
+      localStorage.getItem(languageLocalStorage)
+        ? localStorage.getItem(languageLocalStorage)
+        : 'de'
+  });
 
   private defaultLocale = new BehaviorSubject<string>('de');
 
@@ -35,6 +40,14 @@ export class TranslationService {
         map(label => label ? label['content'] as string : key)
       )
       : of(key);
+  }
+
+  public getCurrentLanguage(): Observable<Maybe<Language>> {
+    return this.currentLanguage.asObservable();
+  }
+
+  public setCurrentLanguage(language: Maybe<Language>) {
+    this.currentLanguage.next(language);
   }
 
   public translatable(

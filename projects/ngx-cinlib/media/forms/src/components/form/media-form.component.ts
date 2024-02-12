@@ -29,7 +29,6 @@ import { MediaFormEntryComponent } from '../entry/media-form-entry.component';
       multi: true,
       useExisting: MediaFormComponent,
     },
-    FeedbackService
   ],
   imports: [
     CommonModule,
