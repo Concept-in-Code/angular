@@ -22,7 +22,7 @@ export class GridRowComponent implements AfterViewInit, OnDestroy {
   @Input()
   public includeInMobile = false;
 
-  /** @see {@link /styles/mobile_mixins.scss} */
+  /** @see {@link /styles/mobile-mixins.scss} */
   @Input()
   public maxMobileSize = 1023;
 
