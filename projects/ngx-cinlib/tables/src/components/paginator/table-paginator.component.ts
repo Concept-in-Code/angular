@@ -51,6 +51,17 @@ export class TablePaginatorComponent {
     return this.paginator.pageSize;
   }
 
+  public _pageSizeOption = [5, 10, 25, 100];
+
+  @Input()
+  public set pageSizeOption(pageSizeOption: number[]) {
+    this._pageSizeOption = pageSizeOption;
+  }
+
+  public get pageSizeOption(): Maybe<number[]> {
+    return this.paginator.pageSizeOptions;
+  }
+
   @Output()
   public page = new EventEmitter<PageEvent>;
 

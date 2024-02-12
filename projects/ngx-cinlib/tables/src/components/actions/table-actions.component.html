@@ -13,12 +13,16 @@
   </button>
 
 } @else {
-  <button *ngIf="inlineEditAction"
-    mat-button
-    [cinTooltip]="inlineEditAction.tooltipLabel"
-    (click)="$event.stopPropagation(); enableInlineEdit();">
-    <cin-icon [icon]="['fas', inlineEditAction.icon]"></cin-icon>
-  </button>
+  @if (inlineEditAction) {
+    <button
+      mat-button
+      [cinTooltip]="inlineEditAction.tooltipLabel"
+      [class.disabled]="isDisabled(inlineEditAction)"
+      [disabled]="isDisabled(inlineEditAction)"
+      (click)="$event.stopPropagation(); enableInlineEdit();">
+      <cin-icon [icon]="['fas', inlineEditAction.icon]"></cin-icon>
+    </button>
+  }
 
   @for (action of (actions | async); track action) {
 
