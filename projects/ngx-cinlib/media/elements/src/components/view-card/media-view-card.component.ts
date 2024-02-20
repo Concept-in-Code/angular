@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { Maybe, Media } from 'ngx-cinlib/core';
@@ -17,6 +18,7 @@ import { MediaElementComponent } from '../element/media-element.component';
     CommonModule,
     FileSizePipe,
     IconComponent,
+    MatButtonModule,
     MatCardModule,
     forwardRef(() => MediaElementComponent),
   ]
