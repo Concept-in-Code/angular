@@ -12,9 +12,9 @@ export class TranslationService {
   private labels = new BehaviorSubject<Map<string, Maybe<Translatable>[]>>(new Map());
 
   private currentLanguage = new BehaviorSubject<Maybe<Language>>({ locale:
-      localStorage.getItem(languageLocalStorage)
-        ? localStorage.getItem(languageLocalStorage)
-        : 'de'
+    localStorage.getItem(languageLocalStorage)
+      ? localStorage.getItem(languageLocalStorage)
+      : 'de'
   });
 
   private defaultLocale = new BehaviorSubject<string>('de');
@@ -48,6 +48,7 @@ export class TranslationService {
 
   public setCurrentLanguage(language: Maybe<Language>) {
     this.currentLanguage.next(language);
+    localStorage.setItem(languageLocalStorage, language?.locale as string);
   }
 
   public translatable(

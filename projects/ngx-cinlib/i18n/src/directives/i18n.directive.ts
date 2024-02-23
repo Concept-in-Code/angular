@@ -32,7 +32,6 @@ export class I18nDirective implements OnInit, OnChanges, OnDestroy {
   public ngOnInit(): void {
     this.labels.pipe(
       distinctUntilChanged(),
-      takeUntil(this.destroy),
       switchMap(label => this.translationService.getLabel(label)),
       map(label => {
         if (this.variables?.entries()) {
@@ -40,6 +39,7 @@ export class I18nDirective implements OnInit, OnChanges, OnDestroy {
         }
         return label;
       }),
+      takeUntil(this.destroy),
     ).subscribe(label => this.el.nativeElement.innerHTML = `${this.prefixing()}${label ?? ''}${this.suffixing()}`);
 
     if (this.i18nLabel) {
