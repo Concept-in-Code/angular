@@ -1,13 +1,13 @@
 {
   "name": "ngx-cinlib",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Contains various reusable components",
   "author": "Concept in Code",
   "repository": {
     "type": "git",
-    "url": "https://github.com/concept-in-code/angular.git"
+    "url": "https://github.com/concept-in-code/cinlib.angular.git"
   },
-  "homepage": "https://github.com/concept-in-code/angular/",
+  "homepage": "https://github.com/concept-in-code/cinlib.angular/",
   "keywords": [
     "angular",
     "javascript",
