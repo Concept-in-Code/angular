@@ -1,13 +1,14 @@
 <div [class.active]="checked"
   (click)="changeSelect($event)"
   class="border-box">
-    <strong [i18nLabel]="input?.label"></strong>
+    <span [i18nLabel]="input?.label"></span>
 
     <section>
-      <cin-icon [icon]="input!.icon" [size]="'lg'"></cin-icon>
-
+      @if (input?.icon){
+        <cin-icon [icon]="input?.icon!" [size]="'lg'"></cin-icon>
+      }
       @if (input?.display) {
-        <span>{{ input?.display }}</span>
+        <strong>{{ input?.display }}</strong>
       }
     </section>
 </div>

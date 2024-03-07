@@ -91,5 +91,4 @@ export class RadioCardGroupComponent<T> implements ControlValueAccessor, OnInit,
     this.destroy.next();
     this.destroy.complete();
   }
-
 }
