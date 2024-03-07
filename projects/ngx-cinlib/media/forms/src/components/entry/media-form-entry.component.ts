@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { Maybe, Media } from 'ngx-cinlib/core';
+import { I18nDirective } from 'ngx-cinlib/i18n';
 import { MediaFormMode } from 'ngx-cinlib/media/common';
 import { MediaFormUploadComponent } from '../upload/media-form-upload.component';
 import { MediaFormUrlComponent } from '../url/media-form-url.component';
@@ -22,6 +23,7 @@ import { MediaFormUrlComponent } from '../url/media-form-url.component';
   ],
   imports: [
     CommonModule,
+    I18nDirective,
     MatCardModule,
     MatDividerModule,
     MediaFormUploadComponent,
