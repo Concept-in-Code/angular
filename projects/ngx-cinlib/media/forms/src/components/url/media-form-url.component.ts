@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +22,7 @@ import { EMPTY, Subject, filter, map, of, switchMap, takeUntil } from 'rxjs';
     CommonModule,
     I18nDirective,
     IconComponent,
+    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

@@ -7,6 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Maybe, Media } from 'ngx-cinlib/core';
 import { CinValidators } from 'ngx-cinlib/forms/validators';
 import { I18nDirective } from 'ngx-cinlib/i18n';
@@ -27,6 +28,7 @@ import { take } from 'rxjs';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule,
     ReactiveFormsModule,
   ]
 })
