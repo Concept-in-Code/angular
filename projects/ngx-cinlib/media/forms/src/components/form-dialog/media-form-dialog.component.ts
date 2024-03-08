@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { Media } from 'ngx-cinlib/core';
+import { I18nDirective } from 'ngx-cinlib/i18n';
 import { MediaFormComponent } from '../form/media-form.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { MediaFormComponent } from '../form/media-form.component';
   standalone: true,
   imports: [
     CommonModule,
+    I18nDirective,
     MatButtonModule,
     MatDialogModule,
     MediaFormComponent,
