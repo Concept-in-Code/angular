@@ -26,7 +26,7 @@ import { TableCellComponent } from './table-cell';
           <cin-icon [icon]="['fas', 'image']"></cin-icon>
         </button>
       } @else {
-        <span *ngIf="!input">{{ ' - ' }}</span>
+        <span>{{ ' - ' }}</span>
       }
     }
   `,
@@ -42,9 +42,10 @@ export class TableCellMediaComponent extends TableCellComponent<Media> {
 
   constructor(
     tableService: TableService,
-
     private dialog: MatDialog,
-  ) { super(tableService); }
+  ) {
+    super(tableService);
+  }
 
   public openForm(): void {
     this.dialog.open(MediaFormDialogComponent, {
@@ -54,7 +55,7 @@ export class TableCellMediaComponent extends TableCellComponent<Media> {
     .pipe(take(1))
     .subscribe((value: Media[]) => {
       if (this.column && this.row && value?.length) {
-        super.tableService.editRow(
+        this.tableService.editRow(
           this.column?.field,
           value[0]
         )
