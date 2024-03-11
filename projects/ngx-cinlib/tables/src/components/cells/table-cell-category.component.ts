@@ -11,6 +11,12 @@ import { TableCellComponent } from './table-cell';
       [category]="input">
     </cin-category-piece>
   `,
+  styles: `
+    cin-category-piece {
+      width: fit-content;
+      display: flex;
+    }
+  `,
   standalone: true,
   imports: [
     CommonModule,

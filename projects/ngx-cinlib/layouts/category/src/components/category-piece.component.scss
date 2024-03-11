@@ -2,7 +2,7 @@ span {
   display: block;
   padding: .25rem .5rem;
   border-radius: var(--mdc-shape-small);
-  text-overflow: ellipsis;
-  width: fit-content;
+  text-overflow: ellipsis; 
+  overflow: hidden;
   cursor: pointer;
 }
