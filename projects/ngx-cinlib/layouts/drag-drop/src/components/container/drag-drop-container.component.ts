@@ -1,6 +1,7 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule, NgComponentOutlet } from '@angular/common';
 import { Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Maybe } from 'ngx-cinlib/core';
 import { IconComponent } from 'ngx-cinlib/icons';
@@ -18,6 +19,7 @@ import { DragDropElementComponent } from '../element/drag-drop-element.component
     CommonModule,
     DragDropModule,
     IconComponent,
+    MatButtonModule,
     MatCardModule,
     NgComponentOutlet,
   ]
