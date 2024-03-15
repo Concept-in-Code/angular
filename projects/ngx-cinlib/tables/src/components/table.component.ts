@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { Maybe, PageableList } from 'ngx-cinlib/core';
 import { Observable, Subject, isObservable, takeUntil } from 'rxjs';
+import { TablePaginatorService } from '../services/table-paginator.service';
 import { TableService } from '../services/table.service';
 import { Column } from '../typings/column';
 import { RowAction } from '../typings/row-action';
@@ -21,6 +23,10 @@ import { TableMobileComponent } from './mobile/table-mobile.component';
   ],
   providers: [
     TableService,
+    {
+      provide: MatPaginatorIntl,
+      useClass: TablePaginatorService
+    }
   ]
 })
 export class TableComponent<T> implements OnInit, OnDestroy {
