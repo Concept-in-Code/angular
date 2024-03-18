@@ -24,10 +24,12 @@ import { FormStepComponent } from '../step/form-step.component';
     MatExpansionModule,
   ],
   providers: [
+    ConfirmService,
     FormStepperService,
   ]
 })
 export class FormStepperComponent implements AfterViewInit, OnDestroy {
+
   //TODO: Implement linear mode
   @Input()
   public set linear(linear: boolean) {
