@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSort, MatSortModule, SortDirection } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { I18nDirective } from 'ngx-cinlib/i18n';
-import { Subject, merge, take, takeUntil, tap } from 'rxjs';
+import { Subject, delay, merge, take, takeUntil, tap } from 'rxjs';
 import { CellDirective } from '../../directives/table-cell.directive';
 import { TableService } from '../../services/table.service';
 import { TableActionsComponent } from '../actions/table-actions.component';
@@ -54,29 +54,38 @@ export class TableDesktopComponent<T> implements AfterViewInit, OnDestroy {
   ) { }
 
   public ngAfterViewInit(): void {
-    this.tableService.getParams()
-      .pipe(take(1))
-      .subscribe(initParams => {
-        this.sort.sort({
-          id: initParams?.sort ?? '',
-          start: initParams?.dir as SortDirection ?? '',
-          disableClear: true
-        });
-      });
 
-    this.sort.sortChange
-      .pipe(takeUntil(this.destroy))
-      .subscribe(() => (this.paginator.pageIndex = 0));
-    
-    merge(this.sort.sortChange, this.paginator.page).pipe(
-      tap(() => this.tableService.setParams({
-        dir: this.sort.direction,
-        sort: this.sort.active,
-        page: this.paginator.pageIndex,
-        size: this.paginator.pageSize,
-      })),
-      takeUntil(this.destroy),
-    ).subscribe();
+    // Timeout fixes ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError
+    // see: https://blog.angular-university.io/angular-debugging/
+    setTimeout(() => {
+      this.tableService.getParams()
+        .pipe(take(1))
+        .subscribe(initParams => {
+          this.sort.sort({
+            id: initParams?.sort ?? '',
+            start: initParams?.dir as SortDirection ?? '',
+            disableClear: true
+          });
+        });
+
+      this.sort.sortChange
+        .pipe(
+          delay(0),
+          takeUntil(this.destroy)
+        )
+        .subscribe(() => (this.paginator.pageIndex = 0));
+      
+      merge(this.sort.sortChange, this.paginator.page).pipe(
+        delay(0),
+        tap(() => this.tableService.setParams({
+          dir: this.sort.direction,
+          sort: this.sort.active,
+          page: this.paginator.pageIndex,
+          size: this.paginator.pageSize,
+        })),
+        takeUntil(this.destroy),
+      ).subscribe();
+    });
   }
 
   public rowClicked(row: T): void {

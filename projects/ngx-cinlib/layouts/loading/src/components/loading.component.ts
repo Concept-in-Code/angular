@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Observable } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
 
 @Component({
@@ -13,12 +14,16 @@ import { LoadingService } from '../services/loading.service';
     MatProgressBarModule,
   ]
 })
-export class LoadingComponent {
+export class LoadingComponent implements OnInit {
 
-  public loading = this.loadingService.isLoading();
+  public loading?: Observable<boolean>;
 
   constructor(
     private loadingService: LoadingService,
-  ) { }
+  ) {}
+  
+  ngOnInit(): void {
+    this.loading = this.loadingService.isLoading();
+  }
 
 }
