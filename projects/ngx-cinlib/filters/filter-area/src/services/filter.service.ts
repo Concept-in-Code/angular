@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Maybe } from 'ngx-cinlib/core';
-import { Observable, filter, map, tap } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { Filter } from '../typings/filter';
 
 @Injectable()
@@ -52,7 +52,6 @@ export class FilterService {
               return !!value;
           }
         })),
-        tap(isActive => console.log('isActive', isActive))
       );
   }
 
