@@ -9,7 +9,7 @@
           
           <span i18nLabel="filter"></span>
           
-          @if (filtersActive) {
+          @if (filtersActive | async) {
             <cin-icon
               class="check-icon"
               [icon]="['fas', 'check']">
@@ -26,11 +26,25 @@
     <mat-card-content>
 
       <!-- The filters to use in this filter area -->
-      <ng-content select="[filters]"></ng-content>
+      <div class="default-search">
+        <ng-content select="[filters]"></ng-content>
+      </div>
+
+      <div class="extended-search" [@collapse]="!extendedCollapsed">
+        <mat-divider></mat-divider>
+        <ng-container [ngTemplateOutlet]="extendedSearch!.templateRef"></ng-container>
+      </div>
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button color="primary" (click)="clearFilters()">
+      @if (extendedSearch) {
+        <button mat-stroked-button class="primary" color="primary"
+          (click)="extendedCollapsed = !extendedCollapsed">
+          <span [i18nLabel]="extendedCollapsed ? 'extendedSearch' : 'closeExtendedSearch'"></span>
+        </button>
+      }
+
+      <button mat-stroked-button class="warn" color="warn" (click)="clearFilters()">
         <span i18nLabel="clearAllFilters"></span>
       </button>
     </mat-card-actions>

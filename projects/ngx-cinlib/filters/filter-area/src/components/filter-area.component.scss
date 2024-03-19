@@ -40,16 +40,35 @@ mat-card {
 
 mat-card-content {
   display: flex;
-  flex-flow: wrap;
-  align-items: center;
+  flex-flow: column;
   gap: 1rem;
+
+  .default-search {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .extended-search {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+  }
 }
 
 mat-card-actions {
   justify-content: flex-end;
 
-  > section {
-    width: 100%;
+  display: flex;
+  gap: 1rem;
+
+  .primary {
+    border-color: var(--color-primary-500);
+  }
+
+  .warn {
+    border-color: var(--color-warn-500);
   }
 }
   
