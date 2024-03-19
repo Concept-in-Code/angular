@@ -22,8 +22,10 @@ export class LoadingComponent implements OnInit {
     private loadingService: LoadingService,
   ) {}
   
-  ngOnInit(): void {
-    this.loading = this.loadingService.isLoading();
+  public ngOnInit(): void {
+    // Timeout fixes ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError
+    // see: https://blog.angular-university.io/angular-debugging/
+    setTimeout(() => this.loading = this.loadingService.isLoading());
   }
 
 }
