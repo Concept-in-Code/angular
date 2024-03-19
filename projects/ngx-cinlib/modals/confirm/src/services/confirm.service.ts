@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ConfirmComponent } from '../components/confirm.component';
 import { Confirm, ConfirmInput, ConfirmType, ConfirmTypeInput } from '../typings/confirm';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConfirmService {
 
   constructor(

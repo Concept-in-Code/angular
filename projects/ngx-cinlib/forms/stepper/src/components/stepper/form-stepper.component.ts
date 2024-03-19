@@ -24,7 +24,6 @@ import { FormStepComponent } from '../step/form-step.component';
     MatExpansionModule,
   ],
   providers: [
-    ConfirmService,
     FormStepperService,
   ]
 })
