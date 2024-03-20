@@ -30,10 +30,12 @@
         <ng-content select="[filters]"></ng-content>
       </div>
 
-      <div class="extended-search" [@collapse]="!extendedCollapsed">
-        <mat-divider></mat-divider>
-        <ng-container [ngTemplateOutlet]="extendedSearch!.templateRef"></ng-container>
-      </div>
+      @if (extendedSearch) {
+        <div class="extended-search" [@collapse]="!extendedCollapsed">
+          <mat-divider></mat-divider>
+          <ng-container [ngTemplateOutlet]="extendedSearch!.templateRef"></ng-container>
+        </div>
+      }
 
     </mat-card-content>
     <mat-card-actions>
