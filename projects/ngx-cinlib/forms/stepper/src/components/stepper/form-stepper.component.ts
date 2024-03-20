@@ -63,7 +63,9 @@ export class FormStepperComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngAfterViewInit(): void {
-    this.steps?.forEach((step, index) => (step.index = index));
+    // Timeout fixes ERROR Error: NG0100: ExpressionChangedAfterItHasBeenCheckedError
+    // see: https://blog.angular-university.io/angular-debugging/
+    setTimeout(() => this.steps?.forEach((step, index) => (step.index = index)));
   }
 
   public save(captchaToken?: string): void {
