@@ -23,7 +23,7 @@ export const growOnSidesAnimation = (duration: number = defaultAnimationDuration
 export const collapse = (duration: number = defaultAnimationDuration) =>
   trigger('collapse', [
     state('true', style({ height: AUTO_STYLE, opacity: 1 })),
-    state('false', style({ height: '0', opacity: 0 })),
+    state('false', style({ height: '0', opacity: 0, })),
     transition('false => true', animate(`${duration}ms ease-in`)),
     transition('true => false', animate(`${duration}ms ease-out`))
   ]);

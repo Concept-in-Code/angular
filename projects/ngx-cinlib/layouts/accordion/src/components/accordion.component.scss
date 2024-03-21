@@ -1,0 +1,42 @@
+.disabled {
+  cursor: not-allowed;
+
+  pointer-events: none;
+}
+
+mat-card {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  height: fit-content;
+
+  border-radius: var(--mdc-shape-small) !important;
+  background-color: var(--color-light);
+
+  .content-area {
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap);
+
+    padding: 1rem;
+    flex: 2 1 auto;
+  
+    section {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+  
+      cursor: pointer;
+  
+      .accordion-title {
+        display: flex;
+        flex-flow: column;
+      }
+    }
+
+  }
+  
+  button {
+    align-self: center;
+  }
+}
