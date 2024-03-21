@@ -51,25 +51,53 @@ export class TranslationService {
     localStorage.setItem(languageLocalStorage, language?.locale as string);
   }
 
-  public translatable(
+  public watchTranslatable(
     v?: any,
     field?: Maybe<string>
-  ): Observable<Maybe<string> | undefined> {
+  ): Observable<Maybe<string>> {
       
     return combineLatest([
       isObservable(v) ? v : of(v),
       this.currentLanguage.asObservable(),
       this.defaultLocale.asObservable()
     ]).pipe(
-      map(([value, language, defaultLocale]) => (Array.isArray(value) 
-        ? [value, language, defaultLocale]
-        : [(value as any)?.translatables, language, defaultLocale]) as [Maybe<Translatable[]>, Language, string]),
-      map(([translatables, language, defaultLocale]) => {
-        const translatable = translatables?.find(t => t?.language?.locale === language?.locale);
-        return translatable ?? translatables?.find(t => t?.language?.locale === defaultLocale);
-      }),
-      map(translatable => (translatable && field ? translatable[field] : '') as string),
+      map(([value, language, defaultLocale]) => this.findTranslatable({
+        value,
+        field,
+        language,
+        defaultLocale
+      }))
     );
+  }
+
+  public translatable(
+    value?: any,
+    field?: Maybe<string>
+  ): Maybe<string> {
+    return this.findTranslatable({
+      value,
+      field,
+      language: this.currentLanguage.value,
+      defaultLocale: this.defaultLocale.value
+    });
+  }
+
+  private findTranslatable(input: {
+    value: any,
+    field: Maybe<string>,
+    language: Maybe<Language>,
+    defaultLocale: string
+  }): Maybe<string> {
+    const translatables: Maybe<Translatable[]> = Array.isArray(input.value)
+    ? input.value
+    : input.value?.translatables;
+    
+    const translatable = translatables?.find(t => t?.language?.locale === input.language?.locale)
+      ?? translatables?.find(t => t?.language?.locale === input.defaultLocale);
+
+    return translatable && input.field
+      ? translatable[input.field] as string
+      : '';
   }
 
 }

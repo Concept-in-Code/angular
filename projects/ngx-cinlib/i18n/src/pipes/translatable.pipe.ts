@@ -15,8 +15,8 @@ export class TranslatablePipe implements PipeTransform {
   ) { }
 
   public transform(
-    v?: any,
+    value?: any,
     field?: Maybe<string>): Observable<Maybe<string> | undefined> {
-    return this.translationService.translatable(v, field);
+    return this.translationService.watchTranslatable(value, field);
   }
 }
