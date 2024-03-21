@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
-import { Maybe, Media, UserContext } from 'ngx-cinlib/core';
+import { AfterViewInit, Component, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Maybe, Media } from 'ngx-cinlib/core';
 
 @Component({
   selector: 'cin-media-avatar',
@@ -12,28 +12,17 @@ import { Maybe, Media, UserContext } from 'ngx-cinlib/core';
 
   ]
 })
-export class MediaAvatarComponent implements OnInit, OnChanges, AfterViewInit {
+export class MediaAvatarComponent implements AfterViewInit {
 
   @Input()
-  public user?: Maybe<UserContext>;
-
   public media?: Maybe<Media>;
+
+  @Input()
+  public name?: Maybe<string>;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2) { }
-
-  public ngOnInit(): void {
-    this.initMedia();
-  }
-
-  public ngOnChanges(): void {
-    this.initMedia();
-  }
-
-  private initMedia() {
-    this.media = this.user?.uploads?.find(upload => upload?.profilePicture)?.media ?? null;
-  }
 
   public ngAfterViewInit(): void {
     const spanElement = this.elementRef.nativeElement.querySelector('.border-image');
