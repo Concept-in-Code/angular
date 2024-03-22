@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -40,18 +40,24 @@ export class RichtextEditorFormComponent implements ControlValueAccessor {
     ]
   };
 
-  public onChange?: (value: string) => void;
+  constructor(
+    private cdr: ChangeDetectorRef,
+  ) {}
+
+  private onChange?: (value: string) => void;
+  private onTouch?: () => void;
 
   public writeValue(value: string): void {
     this.model.editorData = value;
+    this.cdr.detectChanges();
   }
 
   public registerOnChange(onChange: (value: string) => void): void {
     this.onChange = onChange;
   }
 
-  public registerOnTouched(): void {
-    return;
+  public registerOnTouched(onTouch: () => void): void {
+    this.onTouch = onTouch;
   }
 
   public handleEditorReady(editor: unknown): void {
@@ -59,6 +65,7 @@ export class RichtextEditorFormComponent implements ControlValueAccessor {
   }
 
   public handleEditorChange(): void {
+    this.onTouch?.();
     this.onChange?.(
       this.editorInstance.getData()
     );
