@@ -1,21 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { IconComponent } from 'ngx-cinlib/icons';
+import { BooleanComponent } from 'ngx-cinlib/layouts/boolean';
 import { TableService } from '../../services/table.service';
 import { TableCellComponent } from './table-cell';
 
 @Component({
   selector: 'cin-table-cell-boolean',
   template: `
-    <cin-icon [icon]="input 
-      ? ['fas', 'check'] 
-      : ['fas', 'xmark']">
-    </cin-icon>
+    <cin-boolean [value]="input"></cin-boolean>
   `,
   standalone: true,
   imports: [
+    BooleanComponent,
     CommonModule,
-    IconComponent
   ]
 })
 export class TableCellBooleanComponent extends TableCellComponent<boolean> {
