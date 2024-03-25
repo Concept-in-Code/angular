@@ -1,5 +1,7 @@
 <div class="main">
-  <cin-page-title titleLabel="media"></cin-page-title>
+  @if (showTitle) {
+    <cin-page-title titleLabel="media"></cin-page-title>
+  }
 
   <section>
     <cin-radio-button-group
@@ -7,12 +9,15 @@
       [value]="fileType"
       (valueChanged)="fileType = $event">
     </cin-radio-button-group>
-    <button mat-raised-button (click)="routeBack()">
-      <span>
-        <cin-icon [icon]="['fas', 'arrow-left']" [size]="'xs'"></cin-icon>
-        <span [i18nLabel]="backLabel"></span>
-      </span>
-    </button>
+
+    @if (showBack) {
+      <button mat-raised-button (click)="routeBack()">
+        <span>
+          <cin-icon [icon]="['fas', 'arrow-left']" [size]="'xs'"></cin-icon>
+          <span [i18nLabel]="backLabel"></span>
+        </span>
+      </button>
+    }
   </section>
 
   <section>

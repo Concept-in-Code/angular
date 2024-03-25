@@ -39,6 +39,12 @@ export class MediaGalleryComponent implements OnInit, OnChanges {
   @Input()
   public media?: Maybe<Media[]>;
 
+  @Input()
+  public showTitle = true;
+
+  @Input()
+  public showBack = true;
+
   public files?: Media[];
   public images?: Media[];
   public videos?: Media[];
