@@ -13,3 +13,9 @@
     width: 100vw;
   }
 }
+
+.media-form-dialog {
+  .mat-mdc-dialog-container .mat-mdc-dialog-surface {
+    background-color: var(--color-background);
+  }
+}
