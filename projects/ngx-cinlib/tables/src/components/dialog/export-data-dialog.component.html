@@ -1,0 +1,46 @@
+<mat-dialog-content>
+  <h3 class="mat-headline-6" i18nLabel="changePassword"></h3>
+
+  <p i18nLabel="changePasswordText"></p>
+
+  <form [formGroup]="form">
+    <p><mat-checkbox formControlName="csv">CSV</mat-checkbox></p>
+    <p><mat-checkbox formControlName="xml">XML</mat-checkbox></p>
+    <p><mat-checkbox formControlName="json">JSON</mat-checkbox></p>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Field Selection</mat-label>
+      <mat-select formControlName="fieldSelection" multiple>
+        <mat-select-trigger>
+          <span [i18nLabel]="form.value.fieldSelection?.[0]?.label"> </span>
+          @if ((form.value.fieldSelection?.length || 0) > 1) {
+            <span >
+              (+{{(form.value.fieldSelection?.length || 0) - 1}} {{form.value.fieldSelection?.length === 2 ? 'other' : 'others'}})
+            </span>
+          }
+        </mat-select-trigger>
+        @for (item of possibleFields; track $index) {
+          <mat-option [value]="item">
+            <span [i18nLabel]="item.label"></span>
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>     
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button
+    mat-dialog-close
+    i18nLabel="cancel">
+  </button>
+
+  <button mat-flat-button
+    [disabled]="form.invalid"
+    color="primary"
+    i18nLabel="changePassword"
+    (click)="exportData()">
+  </button>
+</mat-dialog-actions>

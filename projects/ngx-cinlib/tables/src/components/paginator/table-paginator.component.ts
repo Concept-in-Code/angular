@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Maybe } from 'ngx-cinlib/core';
+import { IconComponent } from 'ngx-cinlib/icons';
+import { ExportDataButtonComponent } from '../button/export-data-button.component';
 
 @Component({
   selector: 'cin-table-paginator',
@@ -11,9 +13,13 @@ import { Maybe } from 'ngx-cinlib/core';
   imports: [
     CommonModule,
     MatPaginatorModule,
+    IconComponent,
+    ExportDataButtonComponent
   ]
 })
 export class TablePaginatorComponent {
+
+  constructor() {}
 
   @ViewChild(MatPaginator)
   public paginator!: MatPaginator;
@@ -68,5 +74,4 @@ export class TablePaginatorComponent {
   public updatePage(event: PageEvent): void {
     this.page.emit(event);
   }
-
 }
