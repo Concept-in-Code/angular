@@ -3,15 +3,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOptionModule, MatPseudoCheckboxModule } from '@angular/material/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Maybe, PageableList } from 'ngx-cinlib/core';
 import { PasswordConfirmComponent } from 'ngx-cinlib/forms/password';
-import { I18nDirective } from 'ngx-cinlib/i18n';
+import { I18nDirective, TranslationService } from 'ngx-cinlib/i18n';
 import { DetailsTitleComponent } from 'ngx-cinlib/layouts/title';
-import { FeedbackService } from 'ngx-cinlib/modals/feedback';
 import { Observable, take } from 'rxjs';
 import { Column } from '../../typings/column';
 
@@ -22,7 +21,7 @@ export interface DialogData {
 
 export interface TableData {
   field: string,
-  label?: string,
+  label: string,
   value?:  ((row: any) => Observable<Maybe<string>> | Maybe<string>),
 }
 
@@ -62,9 +61,8 @@ export class ExportDataDialogComponent implements OnInit{
   private columns?: Maybe<Column<any>[]>;
 
   constructor(  
+    protected translationService: TranslationService,
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<ExportDataDialogComponent>,
-    public feedbackService: FeedbackService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}  
 
@@ -98,22 +96,49 @@ export class ExportDataDialogComponent implements OnInit{
     }
   }
   
-  exportToCSV() {
-    if(this.exportableData){
-    const csvData = this.convertToCSV(this.exportableData);
-    const blob = new Blob([csvData], { type: 'text/csv' });
-    }
-    // saveAs(blob, 'data.csv');
-  }
 
-  private convertToCSV(data: any[]): string {
-    const fields = Object.keys(data[0]);
-    const csv = [
-      fields.join(','),
-      ...data.map(item => fields.map(field => item[field]).join(','))
-    ];
-    return csv.join('\n');
-  }
+
+  exportToCSV() {
+    const csvContent = this.convertToCSV(this.exportableData!);
+    const element = document.createElement('a');
+    const blob = new Blob([csvContent], { type: 'data/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    element.setAttribute('href', url);
+    element.setAttribute('download', 'primer-server-task.csv');
+    element.style.display = 'none';
+
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+    window.URL.revokeObjectURL(url);
+}
+
+convertToCSV(data: any[]): string {
+    const escapeCSVValue = (value: string) => {
+        if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+            return '"' + value.replace(/"/g, '""') + '"';
+        } else {
+            return value;
+        }
+    };
+   
+    let csvContent = '';
+    if (data.length > 0) {
+       
+        const headers = Object.keys(data[0]);
+        csvContent += headers.map(header => escapeCSVValue(header)).join(';') + '\n';
+
+        data.forEach(row => {
+            const values = headers.map(header => row[header]);
+            csvContent += values.map(value => escapeCSVValue(String(value))).join(';') + '\n';
+        });
+    }
+
+    return csvContent;
+}
+
 
   exportToXML() {
     if (this.exportableData){
@@ -150,6 +175,8 @@ export class ExportDataDialogComponent implements OnInit{
   }
 
   private filterData(list: Maybe<any[]>): Maybe<any[]> {
+    
+
     const filteredList = list?.map(item => {
         const filteredItem: any = {};
         this.form.value.fieldSelection?.forEach(tableData => {
@@ -157,22 +184,34 @@ export class ExportDataDialogComponent implements OnInit{
 
             let fieldValue = item;
 
-            fieldPath.forEach(fieldName => {
+            for (const fieldName of fieldPath) {
                 if (fieldValue && fieldValue.hasOwnProperty(fieldName)) {
+                  // console.log("fieldValue[fieldName]", fieldValue = fieldValue[fieldName]);
+                  // console.log("fieldvalue[fn]item", fieldValue = fieldValue[fieldName](item));
+                  if(tableData.value != null) {
+                    fieldValue = tableData.value(item);
+                    
+                  } else {
                     fieldValue = fieldValue[fieldName];
+                  }
                 } else {
                     fieldValue = null;
+                    break; 
                 }
-            });
-          
-            const prefix = fieldPath[fieldPath.length - 1];   
+            }
 
-            filteredItem[prefix] = fieldValue;
+            if (tableData.label) {
+                this.translationService.getLabel(tableData.label).subscribe(translation => {
+                    if (translation) {
+                        filteredItem[translation] = fieldValue;
+                    }
+                });
+            }
         });
 
         return filteredItem;
     });
-    console.log("filtered", filteredList);
+
     return filteredList;
 }
 
