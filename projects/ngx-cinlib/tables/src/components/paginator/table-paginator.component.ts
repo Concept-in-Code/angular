@@ -19,8 +19,6 @@ import { ExportDataButtonComponent } from '../button/export-data-button.componen
 })
 export class TablePaginatorComponent {
 
-  constructor() {}
-
   @ViewChild(MatPaginator)
   public paginator!: MatPaginator;
 
