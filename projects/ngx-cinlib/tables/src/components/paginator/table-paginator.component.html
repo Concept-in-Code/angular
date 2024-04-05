@@ -1,10 +1,10 @@
-<mat-paginator
-  [length]="_length"
-  [pageSize]="_pageSize"
-  [pageIndex]="_pageIndex"
-  [pageSizeOptions]="_pageSizeOption"
-  (page)="updatePage($event)">
-  <cin-export-data-button>EXPORT DATA</cin-export-data-button>
-</mat-paginator>
-
-<cin-export-data-button>EXPORT DATA</cin-export-data-button>
+<div>
+  <cin-export-data-button></cin-export-data-button>
+  <mat-paginator
+    [length]="_length"
+    [pageSize]="_pageSize"
+    [pageIndex]="_pageIndex"
+    [pageSizeOptions]="_pageSizeOption"
+    (page)="updatePage($event)">
+  </mat-paginator>
+</div>

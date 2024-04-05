@@ -1,23 +1,17 @@
 <mat-dialog-content>
-  <h3 class="mat-headline-6" i18nLabel="changePassword"></h3>
+  <h3 class="mat-headline-6" i18nLabel="dataExport"></h3>
 
-  <p i18nLabel="changePasswordText"></p>
+  <p i18nLabel="dataExportText"></p>
 
   <form [formGroup]="form">
-    <p><mat-checkbox formControlName="csv">CSV</mat-checkbox></p>
-    <p><mat-checkbox formControlName="xml">XML</mat-checkbox></p>
-    <p><mat-checkbox formControlName="json">JSON</mat-checkbox></p>
-
-    <mat-divider></mat-divider>
-
     <mat-form-field appearance="outline">
-      <mat-label>Field Selection</mat-label>
-      <mat-select formControlName="fieldSelection" multiple>
+      <mat-label i18nLabel="columnSelection"></mat-label>
+      <mat-select formControlName="columnSelection" multiple>
         <mat-select-trigger>
-          <span [i18nLabel]="form.value.fieldSelection?.[0]?.label"> </span>
-          @if ((form.value.fieldSelection?.length || 0) > 1) {
+          <span [i18nLabel]="form.value.columnSelection?.[0]?.label"> </span>
+          @if ((form.value.columnSelection?.length || 0) > 1) {
             <span >
-              (+{{(form.value.fieldSelection?.length || 0) - 1}} {{form.value.fieldSelection?.length === 2 ? 'other' : 'others'}})
+              (+{{(form.value.columnSelection?.length || 0) - 1}} {{form.value.columnSelection?.length === 2 ? 'other' : 'others'}})
             </span>
           }
         </mat-select-trigger>
@@ -28,6 +22,15 @@
         }
       </mat-select>
     </mat-form-field>
+    
+    <mat-divider></mat-divider>
+
+    <div>
+      <span><mat-checkbox formControlName="csv">CSV</mat-checkbox></span>
+      <span><mat-checkbox formControlName="xml">XML</mat-checkbox></span>
+      <span><mat-checkbox formControlName="json">JSON</mat-checkbox></span>
+    </div>
+    
   </form>     
 </mat-dialog-content>
 
@@ -40,7 +43,7 @@
   <button mat-flat-button
     [disabled]="form.invalid"
     color="primary"
-    i18nLabel="changePassword"
+    i18nLabel="download"
     (click)="exportData()">
   </button>
 </mat-dialog-actions>

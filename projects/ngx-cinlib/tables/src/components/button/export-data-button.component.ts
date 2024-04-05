@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { I18nDirective } from 'ngx-cinlib/i18n';
 import { IconComponent } from 'ngx-cinlib/icons';
 import { TableService } from '../../services/table.service';
 import { ExportDataDialogComponent } from '../dialog/export-data-dialog.component';
@@ -14,7 +15,8 @@ import { ExportDataDialogComponent } from '../dialog/export-data-dialog.componen
   standalone: true,
   imports: [
     MatButtonModule,
-    IconComponent
+    IconComponent,
+    I18nDirective
   ]
 })
 export class ExportDataButtonComponent { 

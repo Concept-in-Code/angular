@@ -1,5 +1,9 @@
-mat-dialog-content {
+div {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
+  padding: .5rem;
+}
+
+button {
+  margin: 0rem 1rem 0rem;
 }
