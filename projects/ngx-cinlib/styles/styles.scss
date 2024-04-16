@@ -19,3 +19,19 @@
     background-color: var(--color-background);
   }
 }
+
+//TODO: Remove when fixed: https://github.com/h2qutc/angular-material-components/issues/348
+.mat-datepicker-content {
+  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+  background-color: #fff;
+  color: #000000de
+}
+
+.mat-calendar-body-selected {
+  background: var(--color-primary-500) !important;
+  color: var(--color-primary-contrast-500) !important;
+}
+
+.mat-calendar-body-cell-content {
+  border: none !important;
+}
