@@ -6,8 +6,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { collapse } from 'ngx-cinlib/core';
 import { I18nDirective } from 'ngx-cinlib/i18n';
 import { IconComponent } from 'ngx-cinlib/icons';
-import { ExtendedSearchDirective } from '../directives/extended-search.directive';
-import { FilterService } from '../services/filter.service';
+import { ExtendedSearchDirective } from '../../directives/extended-search.directive';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'cin-filter-area',

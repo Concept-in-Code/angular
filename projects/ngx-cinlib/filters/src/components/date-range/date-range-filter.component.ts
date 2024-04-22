@@ -4,9 +4,9 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Maybe, Period } from 'ngx-cinlib/core';
 import { Subject, takeUntil } from 'rxjs';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'cin-date-range-filter',
@@ -31,9 +31,6 @@ export class DateRangeFilterComponent implements OnInit, OnChanges, OnDestroy {
   public initValue?: Period;
 
   @Input()
-  public queryParam = true;
-
-  @Input()
   public queryParamStartKey = 'end';
 
   @Input()
@@ -54,9 +51,8 @@ export class DateRangeFilterComponent implements OnInit, OnChanges, OnDestroy {
   private destroy = new Subject<void>();
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router,
+    private filterService: FilterService,
   ) {
     this.watchValueChange();
   }
@@ -68,12 +64,12 @@ export class DateRangeFilterComponent implements OnInit, OnChanges, OnDestroy {
         startDate: this.initValue.startDate,
         endDate: this.initValue.endDate
       });
-    } else if (this.queryParam) {
-      this.activatedRoute.queryParams
+    } else {
+      this.filterService.queryParams()
         .pipe(takeUntil(this.destroy))
         .subscribe(params => {
-          if (params[this.queryParamStartKey]
-            && params[this.queryParamEndKey]) {
+          if (params?.[this.queryParamStartKey]
+            && params?.[this.queryParamEndKey]) {
               this.form.setValue({
                 startDate: new Date(params[this.queryParamStartKey] ?? ''),
                 endDate: new Date(params[this.queryParamEndKey] ?? '')
@@ -96,13 +92,8 @@ export class DateRangeFilterComponent implements OnInit, OnChanges, OnDestroy {
         this.form.controls.startDate.disable();
         this.form.controls.endDate.disable();
         if (this.queryParamStartKey || this.queryParamEndKey) {
-          this.router.navigate([], {
-            queryParams: {
-              [this.queryParamStartKey]: null,
-              [this.queryParamEndKey]: null,
-            },
-            queryParamsHandling: 'merge',
-          });
+          this.filterService.updateParam(this.queryParamStartKey, null);
+          this.filterService.updateParam(this.queryParamEndKey, null);
         }
       } else {
         this.form.controls.startDate.enable();
@@ -121,23 +112,13 @@ export class DateRangeFilterComponent implements OnInit, OnChanges, OnDestroy {
 
           endDate?.setHours(23, 59, 59, 999);
           this.form.value.startDate?.setHours(0, 0 , 0, 0);
-          
-          if (this.queryParam) {
-            this.router.navigate([], {
-              queryParams: {
-                [this.queryParamStartKey]: this.form.value.startDate?.toISOString(),
-                [this.queryParamEndKey]: endDate?.toISOString(),
-              },
-              queryParamsHandling: 'merge',
-            });
-          }
 
-          const period = {
+          this.valueChanged.emit({
             startDate: this.form.value.startDate,
             endDate,
-          } as Period;
-  
-          this.valueChanged.emit(period);
+          } as Period);
+          this.filterService.updateParam(this.queryParamStartKey, this.form.value.startDate?.toISOString());
+          this.filterService.updateParam(this.queryParamEndKey, endDate?.toISOString());
         }
         this.emitEvent = true;
       });
