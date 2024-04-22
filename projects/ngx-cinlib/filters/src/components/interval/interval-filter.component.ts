@@ -3,10 +3,10 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router } from '@angular/router';
 import { I18nDirective } from 'ngx-cinlib/i18n';
 import { Subject, takeUntil } from 'rxjs';
-import { IntervalFilter } from '../typings/interval';
+import { FilterService } from '../../services/filter.service';
+import { IntervalFilter } from '../../typings/interval';
 
 @Component({
   selector: 'cin-interval-filter',
@@ -26,9 +26,6 @@ export class IntervalFilterComponent implements OnInit, OnDestroy {
 
   @Input()
   public initValue?: IntervalFilter;
-
-  @Input()
-  public queryParam = true;
 
   @Input()
   public queryParamKey = 'interval';
@@ -59,8 +56,7 @@ export class IntervalFilterComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private filterService: FilterService,
   ) {
     this.watchValueChange();
   }
@@ -70,13 +66,13 @@ export class IntervalFilterComponent implements OnInit, OnDestroy {
       this.control.setValue(this.initValue, {
         emitEvent: false,
       });
-    } else if (this.queryParam) {
-      this.activatedRoute.queryParams
+    } else {
+      this.filterService.queryParams()
         .pipe(takeUntil(this.destroy))
         .subscribe(params => {
-          const value = typeof params[this.queryParamKey] === 'string'
+          const value = typeof params?.[this.queryParamKey] === 'string'
             ? [params[this.queryParamKey]]
-            : params[this.queryParamKey];
+            : params?.[this.queryParamKey];
   
           this.control.setValue(value, {
             emitEvent: false,
@@ -89,16 +85,7 @@ export class IntervalFilterComponent implements OnInit, OnDestroy {
     this.control.valueChanges
       .pipe(takeUntil(this.destroy))
       .subscribe((interval: IntervalFilter) => {
-        if (this.queryParam) {
-          this.router.navigate([], {
-
-            queryParams: {
-              [this.queryParamKey || '']: interval
-            },
-            queryParamsHandling: 'merge',
-          });
-        }
-
+        this.filterService.updateParam(this.queryParamKey, interval);
         this.valueChanged.emit(interval);
       });
   }

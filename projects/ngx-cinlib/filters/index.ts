@@ -1,6 +1,8 @@
 
 /* Components */
-export * from './src/components/filter-area.component';
+export * from './src/components/area/filter-area.component';
+export * from './src/components/date-range/date-range-filter.component';
+export * from './src/components/interval/interval-filter.component';
 
 /* Directives */
 export * from './src/directives/extended-search.directive';

@@ -4,6 +4,9 @@ export * from './src/animations/animations';
 /* Constants */
 export * from './src/constants/core.constants';
 
+/* Services */
+export * from './src/services/scroll.service';
+
 /* Typings */ 
 export * from './src/typings/maybe';
 export * from './src/typings/media';

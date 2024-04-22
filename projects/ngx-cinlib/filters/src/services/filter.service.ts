@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Maybe } from 'ngx-cinlib/core';
-import { Observable, filter, map } from 'rxjs';
-import { Filter } from '../typings/filter';
+import { Observable, map } from 'rxjs';
 
 @Injectable()
 export class FilterService {
-
-  private transformFn?: (params?: Maybe<{ [key: string]: any }>) => Filter;
 
   private definition?: { [s: number]: string };
 
@@ -15,6 +12,10 @@ export class FilterService {
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) { }
+
+  public init(definition: { [s: number]: string }): void {
+    this.definition = definition;
+  }
 
   public queryParams(): Observable<Maybe<{ [key: string]: any }>> {
     return this.activatedRoute.queryParams
@@ -33,14 +34,6 @@ export class FilterService {
       }));
   }
 
-  public params(): Observable<Maybe<Filter>> {
-    return this.queryParams()
-      .pipe(
-        filter(params => !!params),
-        map(params => this.transformFn?.(params)),
-      );
-  }
-
   public filtersActive(): Observable<boolean> {
     return this.queryParams()
       .pipe(
@@ -55,15 +48,7 @@ export class FilterService {
       );
   }
 
-  public init(init: {
-    transformFn: (params?: Maybe<{ [key: string]: any }>) => Filter,
-    definition: { [s: number]: string },
-  }): void {
-    this.transformFn = init.transformFn;
-    this.definition = init.definition;
-  }
-
-  public updateParam(key: string, value: Maybe<string>): void {
+  public updateParam(key: string, value: any): void {
     if (value === '') {
       value = undefined;
     }
