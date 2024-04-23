@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  margin-left: .5rem;
+}
+
+div {
+  display: flex;
+  gap: 1rem;
+  padding: .5rem;
+}

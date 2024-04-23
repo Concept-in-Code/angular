@@ -1,3 +1,10 @@
+<button mat-button (click)="exportData()">
+  <div>
+    <cin-icon [icon]="['fas', 'file-export']" ></cin-icon>
+    <span i18nLabel="dataExport"></span>
+  </div>
+</button>
+
 <mat-paginator
   [length]="_length"
   [pageSize]="_pageSize"

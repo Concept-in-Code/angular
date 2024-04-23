@@ -1,15 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Maybe } from 'ngx-cinlib/core';
+import { ExportService } from 'ngx-cinlib/export';
+import { I18nDirective } from 'ngx-cinlib/i18n';
+import { IconComponent } from 'ngx-cinlib/icons';
+import { TableService } from '../../services/table.service';
 
 @Component({
   selector: 'cin-table-paginator',
   templateUrl: './table-paginator.component.html',
   styleUrls: ['./table-paginator.component.scss'],
   standalone: true,
+  providers: [
+    ExportService,
+  ],
   imports: [
     CommonModule,
+    IconComponent,
+    I18nDirective,
+    MatButtonModule,
     MatPaginatorModule,
   ]
 })
@@ -65,8 +76,20 @@ export class TablePaginatorComponent {
   @Output()
   public page = new EventEmitter<PageEvent>;
 
+  constructor(
+    private tableService: TableService,
+    private exportService: ExportService,
+  ) {}
+
   public updatePage(event: PageEvent): void {
     this.page.emit(event);
+  }
+
+  public exportData(): void {
+    this.exportService.exportData({
+      columns: this.tableService.getColumns(),
+      data: this.tableService.getData(),
+    })
   }
 
 }

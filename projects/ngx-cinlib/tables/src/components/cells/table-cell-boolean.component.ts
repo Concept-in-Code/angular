@@ -18,6 +18,6 @@ import { TableCellComponent } from './table-cell';
 export class TableCellBooleanComponent extends TableCellComponent<boolean> {
 
   constructor(
-    store: TableService,
-  ) { super(store); }
+    tableService: TableService,
+  ) { super(tableService); }
 }

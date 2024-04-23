@@ -1,0 +1,50 @@
+<mat-dialog-content>
+  <h3 class="mat-headline-6" i18nLabel="dataExport"></h3>
+
+  <p i18nLabel="dataExportText"></p>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label i18nLabel="columnSelection"></mat-label>
+      <mat-select formControlName="columnSelection" multiple>
+        <mat-select-trigger>
+          <span [i18nLabel]="form.value.columnSelection?.[0]?.label"> </span>
+          @if ((form.value.columnSelection?.length || 0) > 1) {
+            <span i18nLabel="more"
+              [preFix]="' (+' + ((form.value.columnSelection?.length || 0) - 1)"
+              suffix=")">
+            </span>
+          }
+        </mat-select-trigger>
+        @for (column of columns | async; track $index) {
+          <mat-option [value]="column">
+            <span [i18nLabel]="column.label"></span>
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-divider></mat-divider>
+
+    <div>
+      <span><mat-checkbox formControlName="csv">CSV</mat-checkbox></span>
+      <span><mat-checkbox formControlName="xml">XML</mat-checkbox></span>
+      <span><mat-checkbox formControlName="json">JSON</mat-checkbox></span>
+    </div>
+    
+  </form>     
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button
+    mat-dialog-close
+    i18nLabel="cancel">
+  </button>
+
+  <button mat-flat-button
+    [disabled]="form.invalid"
+    color="primary"
+    i18nLabel="download"
+    (click)="exportData()">
+  </button>
+</mat-dialog-actions>
