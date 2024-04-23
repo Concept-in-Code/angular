@@ -5,10 +5,13 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   standalone: true
 })
 export class NumberInputDirective {
-  constructor(private el: ElementRef) {}
+
+  constructor(
+    private el: ElementRef
+  ) {}
 
   @HostListener('input', ['$event'])
-  onInputChange(event: any) {
+  onInputChange() {
     const initialValue = this.el.nativeElement.value;
     const caretPosition = this.el.nativeElement.selectionStart;
   
@@ -17,7 +20,7 @@ export class NumberInputDirective {
     const periodCount = newValue.split('.').length - 1;
     if (periodCount > 1) {
       const parts = newValue.split('.');
-      newValue = parts[0] + '.' + parts.slice(1).join('');
+      newValue = `${parts[0]}.${parts.slice(1).join('')}`;
     }
   
     this.el.nativeElement.value = newValue;
