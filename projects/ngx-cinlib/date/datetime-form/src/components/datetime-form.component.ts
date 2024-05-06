@@ -1,4 +1,4 @@
-import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NGX_MAT_DATE_FORMATS, NGX_MAT_NATIVE_DATE_FORMATS, NgxMatDateAdapter, NgxMatDatetimePickerModule, NgxMatNativeDateAdapter, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validator } from '@angular/forms';
@@ -19,7 +19,9 @@ import { Subject, takeUntil } from 'rxjs';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DatetimeFormComponent),
       multi: true
-    }
+    },
+    { provide: NgxMatDateAdapter, useClass: NgxMatNativeDateAdapter },
+    { provide: NGX_MAT_DATE_FORMATS, useValue: NGX_MAT_NATIVE_DATE_FORMATS }
   ],
   imports: [
     CommonModule,
