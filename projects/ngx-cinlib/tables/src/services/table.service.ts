@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Maybe, PageableList } from 'ngx-cinlib/core';
 import { setFieldValue } from 'ngx-cinlib/utils';
@@ -17,6 +17,8 @@ export class TableService {
   private columns = new BehaviorSubject<Maybe<Column<any>[]>>(null);
 
   private data = new BehaviorSubject<Maybe<PageableList<any>>>(null);
+
+  private detailsComponent = new BehaviorSubject<Maybe<TemplateRef<any>>>(null);
 
   private inlineEditAction = new BehaviorSubject<Maybe<RowCustomAction<any>>>(null);
   private inlineEditActive = new BehaviorSubject<boolean>(false);
@@ -94,6 +96,14 @@ export class TableService {
 
   public setData(data: Maybe<PageableList<any>>): void {
     this.data.next(data);
+  }
+
+  public setDetailsComponent(component: any): void {
+    this.detailsComponent.next(component);
+  }
+
+  public getDetailsComponent(): Observable<Maybe<TemplateRef<any>>> {
+    return this.detailsComponent.asObservable();
   }
 
   public getInlineEditAction(): Observable<Maybe<RowCustomAction<any>>> {

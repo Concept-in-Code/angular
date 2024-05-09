@@ -1,5 +1,5 @@
 <mat-card>
-  <table mat-table [dataSource]="((data | async)?.result || [])" matSort matSortDisableClear>
+  <table mat-table multiTemplateDataRows [dataSource]="((data | async)?.result || [])" matSort matSortDisableClear>
 
     <ng-container *ngFor="let column of columns | async"
       [matColumnDef]="column.field">
@@ -35,8 +35,25 @@
     </tr>
 
     <tr mat-row
-      *matRowDef="let row; columns: displayedColumns | async;">
+      *matRowDef="let row; columns: displayedColumns | async;"
+      class="element-row"
+      [class.border-less-row]="(detailsComponent | async)"
+      [class.expanded-row]="expandRow === row">
     </tr>
+
+    <ng-container *ngIf="(detailsComponent | async)">
+      <tr mat-row class="detail-row" *matRowDef="let row; columns: ['expand']"></tr>
+      <ng-container matColumnDef="expand">
+        <td mat-cell [attr.colspan]="(displayedColumns | async)?.length" *matCellDef="let row">
+          <section [@expand]="expandRow === row ? 'opened' : 'closed'">
+            <ng-container
+              [ngTemplateOutlet]="(detailsComponent | async)!"
+              [ngTemplateOutletContext]="{ $implicit: row }">
+            </ng-container>
+          </section>
+        </td>
+      </ng-container>
+    </ng-container>
 
   </table>
 </mat-card>

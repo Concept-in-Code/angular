@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { Maybe, PageableList } from 'ngx-cinlib/core';
 import { Observable, Subject, isObservable, takeUntil } from 'rxjs';
@@ -42,7 +42,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   }
 
   @Input()
-  public set data (data: Observable<Maybe<PageableList<T>>> | Maybe<PageableList<T>>) {
+  public set data(data: Observable<Maybe<PageableList<T>>> | Maybe<PageableList<T>>) {
     isObservable(data)
       ? data
         .pipe(takeUntil(this.destroy))
@@ -65,6 +65,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Output()
   public rowClicked = new EventEmitter<Maybe<T>>();
+
+  @ContentChild('details')
+  public set detailsComponent(component: TemplateRef<any>) {
+    this.tableService.setDetailsComponent(component);
+  }
 
   private destroy = new Subject<void>();
 

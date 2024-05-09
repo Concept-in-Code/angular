@@ -16,6 +16,23 @@
   }
 }
 
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: var(--color-lighter);
+}
+
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.border-less-row td {
+  border-bottom-width: 0;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -23,10 +40,6 @@
 :host ::ng-deep {
   .mat-mdc-table > thead {
     background-color: var(--color-light) !important;
-  }
-
-  .mat-mdc-table .mat-mdc-row:hover{
-    background-color: var(--color-lightest);
   }
 
   .mdc-data-table__cell, .mdc-data-table__header-cell{
