@@ -20,7 +20,7 @@ import { TablePaginatorComponent } from '../paginator/table-paginator.component'
   standalone: true,
   animations: [
     trigger('expand', [
-      state('closed', style({ height: '0' })),
+      state('closed', style({ height: '0', padding: '0' })),
       state('opened', style({ height: '*' })),
       transition('closed <=> opened', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ])

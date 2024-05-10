@@ -16,9 +16,18 @@
     <mat-card-content (click)="rowClicked(row);"
       [class.clickable]="clickable | async">
       <ng-container *ngFor="let column of (columns | async); let first = first">
-        <section *ngIf="!first">
+        <section class="cell" *ngIf="!first">
           <span [cinRow]="row" [column]="column"></span>
           <small [i18nLabel]="column.label"></small>
+        </section>
+      </ng-container>
+
+      <ng-container *ngIf="(detailsComponent | async)">
+        <section class="details" [@expand]="expandRow === row ? 'opened' : 'closed'">      
+          <ng-container
+            [ngTemplateOutlet]="(detailsComponent | async)!"
+            [ngTemplateOutletContext]="{ $implicit: row }">
+          </ng-container>
         </section>
       </ng-container>
     </mat-card-content>

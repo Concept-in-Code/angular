@@ -18,6 +18,9 @@
 
 tr.detail-row {
   height: 0;
+  section {
+    padding: 1rem;
+  }
 }
 
 tr.element-row:not(.expanded-row):hover {
