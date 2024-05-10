@@ -87,7 +87,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe(row => row && this.rowClicked.emit(row));
 
-    this.tableService.setClickable(this.rowClicked.observed);
+    this.tableService.setObserved(this.rowClicked.observed);
   }
 
   public ngOnDestroy(): void {

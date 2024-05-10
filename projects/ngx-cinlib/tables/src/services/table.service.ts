@@ -12,7 +12,7 @@ export class TableService {
 
   private actions = new BehaviorSubject<Maybe<RowAction<any>[]>>(null);
 
-  private clickable = new BehaviorSubject<boolean>(false);
+  private observed = new BehaviorSubject<boolean>(false);
 
   private columns = new BehaviorSubject<Maybe<Column<any>[]>>(null);
 
@@ -59,14 +59,6 @@ export class TableService {
       return !isInlineEdit;
     }));
     this.setInlineEditAction(inlineEditAction);
-  }
-
-  public setClickable(clickable: boolean): void {
-    this.clickable.next(clickable);
-  }
-
-  public getClickable(): Observable<boolean> {
-    return this.clickable.asObservable();
   }
 
   public getColumns(): Observable<Maybe<Column<any>[]>> {
@@ -116,6 +108,23 @@ export class TableService {
 
   public getInlineEditActive(): Observable<boolean> {
     return this.inlineEditActive.asObservable();
+  }
+
+  public setObserved(observed: boolean): void {
+    this.observed.next(observed);
+  }
+
+  public getObserved(): Observable<boolean> {
+    return this.observed.asObservable();
+  }
+
+  public getClickable(): Observable<boolean> {
+    return combineLatest([
+      this.getObserved(),
+      this.getDetailsComponent()
+    ]).pipe(
+      map(([observed, detailsComponent]) => observed || !!detailsComponent)
+    );
   }
 
   public enableInlineEdit(row: any): void {
