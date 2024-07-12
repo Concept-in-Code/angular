@@ -142,10 +142,21 @@ export class MediaFormComponent implements ControlValueAccessor, Validator, OnDe
     this.media = [...newMedia];
     this.uploads.emit(this.media);
     this.checkErrors();
-    this.onChange?.(this.media);
+    this.onChange?.(this.media.map(element => Object.hasOwn(element, 'media')
+      ? {...element, media: this.mapToMedia((element as MediaEnhanced).media)}
+      : this.mapToMedia(element as Media)
+    ));
 
     //TODO: This needs to be set because view is not updating. Needs debugging
     this.cdr.detectChanges();
+  }
+
+  private mapToMedia(media: Media): Media {
+    return {
+      ...media,
+      modified: new Date(media.modified),
+      url: media.url?.toString()
+    }
   }
 
   private checkErrors(): void {
