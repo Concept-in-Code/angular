@@ -1,10 +1,10 @@
-import { Maybe } from 'ngx-cinlib/core';
+import { Maybe, TypePath } from 'ngx-cinlib/core';
 import { Observable } from 'rxjs';
 import { ColumnType } from './column-type';
 
 export type Column<T> = {
   editable?: boolean,
-  field: string,
+  field: TypePath<T, 4>,
   label?: string,
   sort?: boolean,
   type?: ColumnType,

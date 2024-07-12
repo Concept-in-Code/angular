@@ -3,6 +3,9 @@ export * from './src/components/paginator/table-paginator.component';
 export * from './src/components/sort/table-sort.component';
 export * from './src/components/table.component';
 
+/* Services */
+export * from './src/services/table.service';
+
 /* Typings */
 export * from './src/typings/column';
 export * from './src/typings/column-type';
