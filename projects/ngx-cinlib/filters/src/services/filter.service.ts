@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Maybe } from 'ngx-cinlib/core';
-import { Observable, map } from 'rxjs';
+import { deepEqual } from 'ngx-cinlib/utils';
+import { Observable, distinctUntilChanged, map } from 'rxjs';
 
 @Injectable()
 export class FilterService {
 
   private definition?: { [s: number]: string };
+
+  private current: Maybe<{ [key: string]: any }>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,19 +22,22 @@ export class FilterService {
 
   public queryParams(): Observable<Maybe<{ [key: string]: any }>> {
     return this.activatedRoute.queryParams
-      .pipe(map(queryParams => {
-        const params: Record<string, unknown> = {};
-        
-        if (this.definition) {
-          Object.values(this.definition).forEach((key: any) => {  
-            params[key] = queryParams[key] === 'true' || queryParams[key] === 'false'
-              ? queryParams[key] === 'true'
-              : queryParams[key];
-          });
-        }
+      .pipe(
+        map(queryParams => {
+          const params: Record<string, unknown> = {};
 
-        return params as { [key: string]: Maybe<string> };
-      }));
+          if (this.definition) {
+            Object.values(this.definition).forEach((key: any) => {
+              params[key] = queryParams[key] === 'true' || queryParams[key] === 'false'
+                ? queryParams[key] === 'true'
+                : queryParams[key];
+            });
+          }
+
+          return params as { [key: string]: Maybe<string> };
+        }),
+        distinctUntilChanged((prev, curr) => deepEqual(prev, curr)),
+      )
   }
 
   public filtersActive(): Observable<boolean> {
