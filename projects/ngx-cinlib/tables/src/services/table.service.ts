@@ -23,7 +23,7 @@ export class TableService {
   private inlineEditAction = new BehaviorSubject<Maybe<RowCustomAction<any>>>(null);
   private inlineEditActive = new BehaviorSubject<boolean>(false);
   private inlineEditRow = new BehaviorSubject<any>(null);
-  
+
   private useQueryParams = new BehaviorSubject<boolean>(true);
   private params = new BehaviorSubject<SortPaginate>({
     page: 0,
@@ -51,11 +51,11 @@ export class TableService {
       const isInlineEdit = typeof action !== 'string'
         && Object.hasOwn(action, 'inlineEdit')
         && !!(action as RowCustomAction<any>).inlineEdit
-  
+
       if (isInlineEdit) {
         inlineEditAction = action as RowCustomAction<any>;
       }
-  
+
       return !isInlineEdit;
     }));
     this.setInlineEditAction(inlineEditAction);
@@ -71,7 +71,7 @@ export class TableService {
       this.getActions(),
     ])
       .pipe(
-        map(([columns, actions]) => [ 
+        map(([columns, actions]) => [
           ...columns?.map(c => c.field) || [],
           ...(actions ? ['actions'] : [])
         ])
@@ -167,8 +167,8 @@ export class TableService {
   public setParams(params: SortPaginate): void {
     const newParams = {
       dir: params.dir,
-      page: params.page ?? this.params.value.page,
-      size: params.size ?? this.params.value.size,
+      page: Number(params.page ?? this.params.value.page),
+      size: Number(params.size ?? this.params.value.size),
       sort: params.sort
     };
     this.params.next(newParams);
