@@ -20,8 +20,8 @@ import { TablePaginatorComponent } from '../paginator/table-paginator.component'
   standalone: true,
   animations: [
     trigger('expand', [
-      state('closed', style({ height: '0', padding: '0' })),
-      state('opened', style({ height: '*' })),
+      state('closed', style({ height: '0', padding: '0', overflow: 'hidden', display: 'block' })),
+      state('opened', style({ height: '*', overflow: '*', display: '*' })),
       transition('closed <=> opened', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ])
   ],
@@ -88,7 +88,7 @@ export class TableDesktopComponent<T> implements AfterViewInit, OnDestroy {
           takeUntil(this.destroy)
         )
         .subscribe(() => (this.paginator.pageIndex = 0));
-      
+
       merge(this.sort.sortChange, this.paginator.page).pipe(
         delay(0),
         tap(() => this.tableService.setParams({
@@ -113,7 +113,7 @@ export class TableDesktopComponent<T> implements AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.destroy.next();
-    this.destroy.complete(); 
+    this.destroy.complete();
   }
 
 }
