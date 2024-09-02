@@ -32,6 +32,8 @@ export class TableService {
 
   private rowClicked = new BehaviorSubject<any>(undefined);
 
+  private withFooter = new BehaviorSubject<boolean>(true);
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -96,6 +98,14 @@ export class TableService {
 
   public getDetailsComponent(): Observable<Maybe<TemplateRef<any>>> {
     return this.detailsComponent.asObservable();
+  }
+
+  public getWithFooter(): Observable<boolean> {
+    return this.withFooter.asObservable();
+  }
+
+  public setWithFooter(withFooter: boolean): void {
+    this.withFooter.next(withFooter);
   }
 
   public getInlineEditAction(): Observable<Maybe<RowCustomAction<any>>> {

@@ -34,7 +34,7 @@ import { TablePaginatorComponent } from '../paginator/table-paginator.component'
   ]
 })
 export class TableMobileComponent<T> implements AfterViewInit, OnDestroy {
-  
+
   public actions = this.tableService.getActions();
 
   public columns = this.tableService.getColumns();
@@ -47,23 +47,25 @@ export class TableMobileComponent<T> implements AfterViewInit, OnDestroy {
 
   public expandRow?: Maybe<T>;
 
+  public withFooter = this.tableService.getWithFooter();
+
   @ViewChild('container')
   private container?: ElementRef;
 
   private destroy = new Subject<void>();
 
   @ViewChild(TablePaginatorComponent)
-  public paginator!: TablePaginatorComponent;
+  public paginator?: TablePaginatorComponent;
 
   constructor(
     private tableService: TableService,
   ) { }
 
   public ngAfterViewInit(): void {
-    this.paginator.page.pipe(
+    this.paginator?.page.pipe(
       tap(() => this.tableService.setParams({
-        page: this.paginator.pageIndex,
-        size: this.paginator.pageSize,
+        page: this.paginator?.pageIndex,
+        size: this.paginator?.pageSize,
       })),
       tap(() => this.container?.nativeElement?.scrollIntoView()),
       takeUntil(this.destroy),

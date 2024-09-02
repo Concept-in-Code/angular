@@ -23,7 +23,7 @@
       </ng-container>
 
       <ng-container *ngIf="(detailsComponent | async)">
-        <section class="details" [@expand]="expandRow === row ? 'opened' : 'closed'">      
+        <section class="details" [@expand]="expandRow === row ? 'opened' : 'closed'">
           <ng-container
             [ngTemplateOutlet]="(detailsComponent | async)!"
             [ngTemplateOutletContext]="{ $implicit: row }">
@@ -39,10 +39,12 @@
     </cin-table-actions>
   </mat-card>
 
-  <mat-card class="paginator">
-    <cin-table-paginator
-      [length]="(data | async)?.total"
-      [pageSize]="10">
-    </cin-table-paginator>
-  </mat-card>
+  @if (withFooter | async) {
+    <mat-card class="paginator">
+      <cin-table-paginator
+        [length]="(data | async)?.total"
+        [pageSize]="10">
+      </cin-table-paginator>
+    </mat-card>
+  }
 </div>

@@ -60,6 +60,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     this.tableService.setUseQueryParams(queryParams);
   }
 
+  @Input()
+  public set withFooter(withFooter: boolean) {
+    this.tableService.setWithFooter(withFooter);
+  }
+
   @Output()
   public sortPaginate = new EventEmitter<SortPaginate>();
 
@@ -98,4 +103,4 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     this.destroy.next();
     this.destroy.complete();
   }
-} 
+}

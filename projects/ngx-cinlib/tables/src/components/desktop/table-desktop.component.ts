@@ -55,8 +55,10 @@ export class TableDesktopComponent<T> implements AfterViewInit, OnDestroy {
 
   public initParams = this.tableService.getParams();
 
+  public withFooter = this.tableService.getWithFooter();
+
   @ViewChild(TablePaginatorComponent)
-  public paginator!: TablePaginatorComponent;
+  public paginator?: TablePaginatorComponent;
 
   @ViewChild(MatSort)
   public sort!: MatSort;
@@ -87,18 +89,24 @@ export class TableDesktopComponent<T> implements AfterViewInit, OnDestroy {
           delay(0),
           takeUntil(this.destroy)
         )
-        .subscribe(() => (this.paginator.pageIndex = 0));
+        .subscribe(() =>  {
+          if (this.paginator) {
+            this.paginator.pageIndex = 0;
+          }
+        });
 
-      merge(this.sort.sortChange, this.paginator.page).pipe(
-        delay(0),
-        tap(() => this.tableService.setParams({
-          dir: this.sort.direction,
-          sort: this.sort.active,
-          page: this.paginator.pageIndex,
-          size: this.paginator.pageSize,
-        })),
-        takeUntil(this.destroy),
-      ).subscribe();
+      if (this.paginator && this.sort) {
+        merge(this.sort.sortChange, this.paginator.page).pipe(
+          delay(0),
+          tap(() => this.tableService.setParams({
+            dir: this.sort.direction,
+            sort: this.sort.active,
+            page: this.paginator?.pageIndex,
+            size: this.paginator?.pageSize,
+          })),
+          takeUntil(this.destroy),
+        ).subscribe();
+      }
     });
   }
 
