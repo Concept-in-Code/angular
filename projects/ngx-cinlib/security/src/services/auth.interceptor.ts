@@ -13,8 +13,8 @@ export class AuthInterceptor implements HttpInterceptor {
   ) { }
 
   public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(this.authService.tokens?.access
-        ? request.clone({ headers: request.headers.set('Authorization', `Bearer ${this.authService.tokens?.access}`)})
+    return next.handle(this.authService.rawTokens?.access
+        ? request.clone({ headers: request.headers.set('Authorization', `Bearer ${this.authService.rawTokens?.access}`)})
         : request
       ).pipe(
         switchMap((response: HttpEvent<ApiResponse>) => this.handleRefresh(request, next, response)),
@@ -22,14 +22,15 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleRefresh(
-      request: HttpRequest<unknown>,
-      next: HttpHandler,
-      response: HttpEvent<ApiResponse>): Observable<HttpEvent<ApiResponse>> {
+    request: HttpRequest<unknown>,
+    next: HttpHandler,
+    response: HttpEvent<ApiResponse>
+  ): Observable<HttpEvent<ApiResponse>> {
     return (response instanceof HttpResponse)
         && response.body?.errors?.find((error: ApiError) => error.extensions.exception === 'AccessDeniedException')
       ? this.authService.refresh().pipe(
           switchMap(() => next.handle(request.clone({
-            headers: request.headers.set('Authorization', `Bearer ${this.authService.tokens?.access}`)
+            headers: request.headers.set('Authorization', `Bearer ${this.authService.rawTokens?.access}`)
           }))),
         )
       : of(response);

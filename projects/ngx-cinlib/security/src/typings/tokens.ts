@@ -1,6 +1,6 @@
 import { Maybe } from 'ngx-cinlib/core';
 
-export type Tokens = {
+export type RawTokens = {
   access?: Maybe<string>;
   refresh?: Maybe<string>;
 };

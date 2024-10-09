@@ -6,23 +6,31 @@ import { filter, map, tap } from 'rxjs/operators';
 import { CIN_AUTH_TOKENS } from '../constants/inject-tokens';
 import { refreshKey } from '../constants/refresh';
 import { Token } from '../typings/token';
-import { Tokens } from '../typings/tokens';
+import { RawTokens } from '../typings/tokens';
 import { LoginGQL, LoginMutation } from './login.service';
 import { RefreshGQL, RefreshMutation } from './refresh.service';
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
  })
 export class AuthService {
 
-  public tokens?: Maybe<Tokens>;
-
   private clearPerformed = new BehaviorSubject<boolean>(false);
 
-  public get userPrivileges(): Maybe<string[]> {
-    return this.tokens?.access
+  public rawTokens?: Maybe<RawTokens>;
+
+  public get privileges(): Maybe<string[]> {
+    return this.rawTokens?.access
       ? (JSON.parse(
-            window.atob(this.tokens.access.split('.')[1])
+            window.atob(this.rawTokens.access.split('.')[1])
+          ) as Token)?.privileges
+      : undefined;
+  }
+
+  public get roles(): Maybe<string[]> {
+    return this.rawTokens?.access
+      ? (JSON.parse(
+            window.atob(this.rawTokens.access.split('.')[1])
           ) as Token)?.privileges
       : undefined;
   }
@@ -30,9 +38,9 @@ export class AuthService {
   constructor(
     private readonly injector: Injector,
     @Inject(CIN_AUTH_TOKENS)
-    public initTokens: Tokens,
+    public initTokens: RawTokens,
   ) {
-    this.tokens = { ...initTokens };
+    this.rawTokens = { ...initTokens };
 
     // if (!this.tokens.refresh) {
     //   this.clearPerformed.next(true);
@@ -43,14 +51,20 @@ export class AuthService {
     return this.clearPerformed.asObservable();
   }
 
-  public hasAnyPrivileges<T>(privileges: T[]): boolean {
-    return (privileges as string[]).some(privilege =>
-      this.userPrivileges?.includes(privilege) || this.userPrivileges?.includes('admin')
+  public hasAnyPrivileges<T extends string>(privileges: T[]): boolean {
+    return privileges.some(privilege =>
+      this.roles?.includes(privilege) || this.roles?.includes('admin')
     );
   }
 
-  public refresh(): Observable<Tokens> {
-    const token = this.tokens?.refresh;
+  public hasAnyRoles<T extends string>(roles: T[]): boolean {
+    return roles.some(privilege =>
+      this.roles?.includes(privilege) || this.roles?.includes('admin')
+    );
+  }
+
+  public refresh(): Observable<RawTokens> {
+    const token = this.rawTokens?.refresh;
     if (token) {
       return this.callRefresh(token);
     }
@@ -60,20 +74,20 @@ export class AuthService {
       const refreshToken: Token = JSON.parse(
         window.atob(tokenStr.split('.')[1])
       );
-      
+
       if (!this.expired(refreshToken.exp)) {
         return this.callRefresh(tokenStr)
       }
     }
-    
+
     this.clear();
     return EMPTY;
   }
 
-  private callRefresh(refreshToken: string): Observable<Tokens> {
+  private callRefresh(refreshToken: string): Observable<RawTokens> {
     return this.injector.get<RefreshGQL>(RefreshGQL).mutate({ refreshToken }).pipe(
-      map((response: FetchResult<RefreshMutation>) => response.data?.refreshToken as Tokens),
-      tap((tokens: Tokens) => this.storeTokens(tokens)),
+      map((response: FetchResult<RefreshMutation>) => response.data?.refreshToken as RawTokens),
+      tap((tokens: RawTokens) => this.storeTokens(tokens)),
     );
   }
 
@@ -85,26 +99,26 @@ export class AuthService {
     this.clear();
   }
 
-  public login(email: string, password: string): Observable<Tokens> {
+  public login(email: string, password: string): Observable<RawTokens> {
     return this.injector.get<LoginGQL>(LoginGQL).mutate({ email, password }).pipe(
-      map((response: FetchResult<LoginMutation>) => response.data?.createToken as Tokens),
+      map((response: FetchResult<LoginMutation>) => response.data?.createToken as RawTokens),
       filter(tokens => !!tokens),
-      tap((tokens: Tokens) => this.storeTokens(tokens)),
+      tap((tokens: RawTokens) => this.storeTokens(tokens)),
     );
   }
 
-  private storeTokens(tokens: Tokens): void {
-    this.tokens = tokens;
+  private storeTokens(tokens: RawTokens): void {
+    this.rawTokens = tokens;
 
     tokens.refresh
       && localStorage.setItem(refreshKey, tokens.refresh)
   }
 
   public clear(): void {
-    this.tokens = undefined;
+    this.rawTokens = undefined;
     localStorage.removeItem(refreshKey);
     this.clearPerformed.next(true);
-    
+
   }
 
 }
