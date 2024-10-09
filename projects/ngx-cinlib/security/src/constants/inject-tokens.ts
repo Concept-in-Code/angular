@@ -1,4 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { Tokens } from '../typings/tokens';
+import { RawTokens } from '../typings/tokens';
 
-export const CIN_AUTH_TOKENS = new InjectionToken<Tokens>('cin-auth-tokens');
+export const CIN_AUTH_TOKENS = new InjectionToken<RawTokens>('cin-auth-tokens');
